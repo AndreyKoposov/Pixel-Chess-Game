@@ -5,10 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="450">
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="Assets/pixel chess_v1.2/boards/board_plain_01.png"/>
-        </Grid.Background>
-    </Grid>
+        Title="ChessGame" Width="450" SizeToContent="Height"
+        WindowStartupLocation="CenterScreen"
+        Background="#101010">
+    
+    <Viewbox>
+        <Grid x:Name="BoardGrid"
+              Width="450" 
+              Height="450">
+            <Grid.Background>
+                <ImageBrush ImageSource="Assets/pixel chess_v1.2/boards/board_plain_04.png" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+            </Grid.Background>
+
+            <UniformGrid x:Name="PiecesGrid"
+                         Rows="8"
+                         Columns="8"
+                         Margin="20,20,20,30"
+                         RenderOptions.BitmapScalingMode="NearestNeighbor">
+            </UniformGrid>
+        </Grid>
+    </Viewbox>
 </Window>
