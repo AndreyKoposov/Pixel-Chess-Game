@@ -1,0 +1,91 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\pixel chess_v1.2\16x16 pieces\BlackPieces.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x16 pieces\BlackPieces_Simplified.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x16 pieces\BlackPieces_Wood.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x16 pieces\BlackPieces_WoodSimplified.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x16 pieces\WhitePieces.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x16 pieces\WhitePieces_Simplified.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x16 pieces\WhitePieces_Wood.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x16 pieces\WhitePieces_WoodSimplified.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\BlackPieces-Sheet.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\BlackPiecesWood-Sheet.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\B_Bishop.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\B_King.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\B_Knight.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\B_Pawn.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\B_Queen.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\B_Rook.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\WhitePieces-Sheet.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\WhitePiecesWood-Sheet.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\W_Bishop.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\W_King.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\W_Knight.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\W_Pawn.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\W_Queen.png" />
+    <None Remove="Assets\pixel chess_v1.2\16x32 pieces\W_Rook.png" />
+    <None Remove="Assets\pixel chess_v1.2\boards\board_persp_01.png" />
+    <None Remove="Assets\pixel chess_v1.2\boards\board_persp_02.png" />
+    <None Remove="Assets\pixel chess_v1.2\boards\board_persp_03.png" />
+    <None Remove="Assets\pixel chess_v1.2\boards\board_persp_04.png" />
+    <None Remove="Assets\pixel chess_v1.2\boards\board_persp_05.png" />
+    <None Remove="Assets\pixel chess_v1.2\boards\board_plain_01.png" />
+    <None Remove="Assets\pixel chess_v1.2\boards\board_plain_02.png" />
+    <None Remove="Assets\pixel chess_v1.2\boards\board_plain_03.png" />
+    <None Remove="Assets\pixel chess_v1.2\boards\board_plain_04.png" />
+    <None Remove="Assets\pixel chess_v1.2\boards\board_plain_05.png" />
+    <None Remove="Assets\pixel chess_v1.2\cursor.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GameLogic\GameLogic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\pixel chess_v1.2\16x16 pieces\BlackPieces.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x16 pieces\BlackPieces_Simplified.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x16 pieces\BlackPieces_Wood.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x16 pieces\BlackPieces_WoodSimplified.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x16 pieces\WhitePieces.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x16 pieces\WhitePieces_Simplified.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x16 pieces\WhitePieces_Wood.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x16 pieces\WhitePieces_WoodSimplified.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\BlackPieces-Sheet.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\BlackPiecesWood-Sheet.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\B_Bishop.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\B_King.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\B_Knight.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\B_Pawn.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\B_Queen.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\B_Rook.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\WhitePieces-Sheet.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\WhitePiecesWood-Sheet.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\W_Bishop.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\W_King.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\W_Knight.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\W_Pawn.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\W_Queen.png" />
+    <Resource Include="Assets\pixel chess_v1.2\16x32 pieces\W_Rook.png" />
+    <Resource Include="Assets\pixel chess_v1.2\boards\board_persp_01.png" />
+    <Resource Include="Assets\pixel chess_v1.2\boards\board_persp_02.png" />
+    <Resource Include="Assets\pixel chess_v1.2\boards\board_persp_03.png" />
+    <Resource Include="Assets\pixel chess_v1.2\boards\board_persp_04.png" />
+    <Resource Include="Assets\pixel chess_v1.2\boards\board_persp_05.png" />
+    <Resource Include="Assets\pixel chess_v1.2\boards\board_plain_01.png" />
+    <Resource Include="Assets\pixel chess_v1.2\boards\board_plain_02.png" />
+    <Resource Include="Assets\pixel chess_v1.2\boards\board_plain_03.png" />
+    <Resource Include="Assets\pixel chess_v1.2\boards\board_plain_04.png" />
+    <Resource Include="Assets\pixel chess_v1.2\boards\board_plain_05.png" />
+    <Resource Include="Assets\pixel chess_v1.2\cursor.png" />
+  </ItemGroup>
+
+</Project>
