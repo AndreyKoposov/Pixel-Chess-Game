@@ -30,6 +30,10 @@
                          Margin="20,20,20,30"
                          RenderOptions.BitmapScalingMode="NearestNeighbor">
             </UniformGrid>
+
+            <ContentControl x:Name="MenuContainer">
+                
+            </ContentControl>
         </Grid>
     </Viewbox>
 </Window>

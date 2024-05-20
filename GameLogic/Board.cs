@@ -27,7 +27,7 @@ namespace GameLogic
 
         private void AddStartPieces()
         {
-            this[0, 0] = new Rook(Player.Black);
+            /*this[0, 0] = new Rook(Player.Black);
             this[0, 1] = new Knight(Player.Black);
             this[0, 2] = new Bishop(Player.Black);
             this[0, 3] = new Queen(Player.Black);
@@ -49,7 +49,13 @@ namespace GameLogic
             {
                 this[1, i] = new Pawn(Player.Black);
                 this[6, i] = new Pawn(Player.White);
-            }
+            }*/
+
+            this[1, 4] = new Knight(Player.White);
+            this[5, 4] = new Rook(Player.White);
+            this[7, 6] = new King(Player.White);
+            this[1, 6] = new Pawn(Player.Black);
+            this[1, 7] = new King(Player.Black);
         }
 
         public static bool IsInside(Position pos)
