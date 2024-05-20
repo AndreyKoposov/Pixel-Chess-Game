@@ -19,13 +19,14 @@
             }
 
             Piece piece = Board[pos];
+            var moveCandidates = piece.GetMoves(pos, Board);
 
-            return piece.GetMoves(pos, Board);
+            return moveCandidates.Where(move => move.IsLegal(Board));
         }
 
         public void Move(Move move)
         {
-            move.Execute(Board);
+            move.ExecuteOn(Board);
             CurrentPlayer = CurrentPlayer.Opponent();
         }
     }

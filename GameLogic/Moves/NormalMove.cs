@@ -12,7 +12,7 @@
             ToPos = toPos;
         }
 
-        public override void Execute(Board board)
+        public override void ExecuteOn(Board board)
         {
             Piece piece = board[FromPos];
 

@@ -35,5 +35,14 @@
         {
             return dirs.SelectMany(dir => MovePositionInDir(from, board, dir));
         }
+
+        public virtual bool CanCaptureOpponentKing(Position from, Board board)
+        {
+            return GetMoves(from, board).Any(move =>
+            {
+                Piece toPiece = board[move.ToPos];
+                return toPiece != null && toPiece.Type == PieceType.King;
+            });
+        }
     }
 }

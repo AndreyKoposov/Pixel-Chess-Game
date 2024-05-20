@@ -54,5 +54,14 @@
                 yield return new NormalMove(from, to);
             }
         }
+
+        public override bool CanCaptureOpponentKing(Position from, Board board)
+        {
+            return MovePositions(from, board).Any(to =>
+            {
+                Piece toPiece = board[to];
+                return toPiece != null && toPiece.Type == PieceType.King;
+            });
+        }
     }
 }
