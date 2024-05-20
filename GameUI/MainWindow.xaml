@@ -12,10 +12,17 @@
     <Viewbox>
         <Grid x:Name="BoardGrid"
               Width="450" 
-              Height="450">
+              Height="450"
+              MouseDown="BoardGrid_MouseDown">
             <Grid.Background>
                 <ImageBrush ImageSource="Assets/pixel chess_v1.2/boards/board_plain_04.png" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
             </Grid.Background>
+
+            <UniformGrid x:Name="HighlightGrid"
+                         Rows="8"
+                         Columns="8"
+                         Margin="20,20,20,20">
+            </UniformGrid>
 
             <UniformGrid x:Name="PiecesGrid"
                          Rows="8"

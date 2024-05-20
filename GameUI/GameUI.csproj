@@ -43,6 +43,7 @@
     <None Remove="Assets\pixel chess_v1.2\boards\board_plain_03.png" />
     <None Remove="Assets\pixel chess_v1.2\boards\board_plain_04.png" />
     <None Remove="Assets\pixel chess_v1.2\boards\board_plain_05.png" />
+    <None Remove="Assets\pixel chess_v1.2\cursor.cur" />
     <None Remove="Assets\pixel chess_v1.2\cursor.png" />
   </ItemGroup>
 
@@ -85,6 +86,7 @@
     <Resource Include="Assets\pixel chess_v1.2\boards\board_plain_03.png" />
     <Resource Include="Assets\pixel chess_v1.2\boards\board_plain_04.png" />
     <Resource Include="Assets\pixel chess_v1.2\boards\board_plain_05.png" />
+    <Resource Include="Assets\pixel chess_v1.2\cursor.cur" />
     <Resource Include="Assets\pixel chess_v1.2\cursor.png" />
   </ItemGroup>
 
