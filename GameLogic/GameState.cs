@@ -17,6 +17,11 @@ namespace GameLogic {
             PlayerKing = Board.GetGunKing();
         }
 
+        public static void ReloadGame()
+        {
+            singleton = new GameState(Player.White, Board.Initial());
+        }
+
         public IEnumerable<Move> LegalMovesForPiece (Position pos) {
             if (Board.IsEmpty(pos) || Board[pos].Color != CurrentPlayer)
                 return [];
