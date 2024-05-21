@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,8 +17,7 @@ namespace GameUI;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : Window
-{
+public partial class MainWindow : Window {
     private readonly Image[,] pieceImages = new Image[8, 8];
     private readonly Rectangle[,] highlights = new Rectangle[8, 8];
     private readonly TextBlock[,] hps = new TextBlock[8, 8];
@@ -26,28 +26,33 @@ public partial class MainWindow : Window
 
     private GameState gameState;
     private Position selectedPos = null;
-    public MainWindow()
-    {
+    public MainWindow () {
         InitializeComponent();
         InitializeBoard();
         //SetCursor();
 
-        gameState = GameState.GetInstance();
-        DrawBoard(gameState.Board);
+        StartLevelMenu();
     }
 
-    private void SetCursor()
-    {
+    private void StartLevelMenu () {
+        LevelMenu levelMenu = new LevelMenu();
+        MenuContainer.Content = levelMenu;
+
+        levelMenu.LevelSelected += level => {
+            MenuContainer.Content = null;
+            gameState = GameState.GetInstance();
+            DrawBoard(gameState.Board);
+        };
+    }
+
+    private void SetCursor () {
         Stream stream = Application.GetResourceStream(new Uri("Assets/pixel chess_v1.2/cursor.cur", UriKind.Relative)).Stream;
         Cursor = new Cursor(stream, true);
     }
 
-    private void InitializeBoard()
-    {
-        for(int r = 0; r < 8; r++)
-        {
-            for (int c = 0; c < 8; c++)
-            {
+    private void InitializeBoard () {
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
                 Image image = new Image();
                 pieceImages[r, c] = image;
                 PiecesGrid.Children.Add(image);
@@ -58,7 +63,7 @@ public partial class MainWindow : Window
 
                 TextBlock text = new TextBlock();
                 text.FontSize = 14;
-                text.Margin = new Thickness(5,0,0,0);
+                text.Margin = new Thickness(5, 0, 0, 0);
                 text.Foreground = Brushes.IndianRed;
                 hps[r, c] = text;
                 HPsGrid.Children.Add(text);
@@ -66,8 +71,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void DrawBoard(Board board)
-    {
+    private void DrawBoard (Board board) {
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
                 Piece piece = board[r, c];
@@ -82,87 +86,84 @@ public partial class MainWindow : Window
         }
     }
 
-    private void BoardGrid_MouseDown(object sender, MouseButtonEventArgs e)
-    {
-        if(IsMenuOnScreen())
-        {
-            return;
-        }
+    private void BoardGrid_MouseDown (object sender, MouseButtonEventArgs e) {
+        if (IsMenuOnScreen()) return;
+        if (gameState.CurrentPlayer != gameState.PlayerKing.Color) return;
 
         Point point = e.GetPosition(HighlightGrid);
         Position pos = ToSquarePosition(point);
 
-        if(selectedPos == null)
-        {
+        if (selectedPos == null) {
             OnFromPositionSelected(pos);
         }
-        else
-        {
+        else {
             OnToPositionSelected(pos);
         }
     }
 
-    private Position ToSquarePosition(Point point)
-    {
+    private Position ToSquarePosition (Point point) {
         double squareSize = HighlightGrid.ActualWidth / 8;
 
-        int row = (int)(point.Y / squareSize);
-        int col = (int)(point.X / squareSize);
+        int row = (int) (point.Y / squareSize);
+        int col = (int) (point.X / squareSize);
 
         return new Position(row, col);
     }
 
-    private void OnFromPositionSelected(Position pos)
-    {
+    private void OnFromPositionSelected (Position pos) {
         IEnumerable<Move> moves = gameState.LegalMovesForPiece(pos);
 
-        if (moves.Any())
-        {
+        if (moves.Any()) {
             selectedPos = pos;
             CacheMoves(moves);
             ShowHighlights();
         }
     }
 
-    private void OnToPositionSelected(Position pos)
-    {
+    private void OnToPositionSelected (Position pos) {
         selectedPos = null;
         HideHighlights();
 
-        if(moveCache.TryGetValue(pos, out Move move))
-        {
+        if (moveCache.TryGetValue(pos, out Move move)) {
             HandleMove(move);
+        }
+
+        if (gameState.CurrentPlayer == gameState.PlayerKing.Color.Opponent()) {
+            OpponentTurnTask();
         }
     }
 
-    private void HandleMove(Move move)
-    {
+    async private void OpponentTurnTask () {
+
+        while (gameState.OpponentMoves.Count > 0) {
+            Move opponentMove = gameState.OpponentMoves.Pop();
+            HandleMove(opponentMove);
+            await Task.Delay(300);
+        }
+    }
+
+    private void HandleMove (Move move) {
         gameState.Move(move);
         DrawBoard(gameState.Board);
 
-        if(gameState.IsGameOver())
-        {
+        if (gameState.IsGameOver()) {
             ShowGameOver();
         }
     }
 
-    private void CacheMoves(IEnumerable<Move> moves)
-    {
+    private void CacheMoves (IEnumerable<Move> moves) {
         moveCache.Clear();
 
-        foreach(Move move in moves)
-        {
+        foreach (Move move in moves) {
             moveCache[move.ToPos] = move;
         }
     }
 
-    private void ShowHighlights()
-    {
+    private void ShowHighlights () {
         Color moveColor = Color.FromArgb(150, 47, 255, 36);
         Color shotColor = Color.FromArgb(150, 255, 125, 125);
 
-        foreach (var pair in moveCache)
-        {
+        foreach (var pair in moveCache) {
             if (pair.Value.Type == MoveType.Normal)
                 highlights[pair.Key.Row, pair.Key.Column].Fill = new SolidColorBrush(moveColor);
             if (pair.Value.Type == MoveType.ShotMove)
@@ -170,44 +171,35 @@ public partial class MainWindow : Window
         }
     }
 
-    private void HideHighlights()
-    {
-        foreach (Position pos in moveCache.Keys)
-        {
+    private void HideHighlights () {
+        foreach (Position pos in moveCache.Keys) {
             highlights[pos.Row, pos.Column].Fill = Brushes.Transparent;
         }
     }
 
-    private bool IsMenuOnScreen()
-    {
+    private bool IsMenuOnScreen () {
         return MenuContainer.Content != null;
     }
 
-    private void ShowGameOver()
-    {
+    private void ShowGameOver () {
         GameOverMenu gameOverMenu = new GameOverMenu(gameState);
         MenuContainer.Content = gameOverMenu;
 
-        gameOverMenu.OptionSelected += option =>
-        {
-            if(option == Option.Restart)
-            {
+        gameOverMenu.OptionSelected += option => {
+            if (option == Option.Restart) {
                 MenuContainer.Content = null;
                 RestartGame();
             }
-            else
-            {
+            else {
                 Application.Current.Shutdown();
             }
         };
     }
 
-    private void RestartGame()
-    {
+    private void RestartGame () {
         HideHighlights();
         moveCache.Clear();
 
-        gameState = GameState.GetInstance();
-        DrawBoard(gameState.Board);
+        StartLevelMenu();
     }
 }
