@@ -40,6 +40,7 @@
             <ContentControl x:Name="MenuContainer">
                 
             </ContentControl>
+           
         </Grid>
     </Viewbox>
 </Window>

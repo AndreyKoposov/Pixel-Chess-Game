@@ -33,8 +33,20 @@ namespace GameUI
             InitializeBoard();
             //SetCursor();
 
-            gameState = new GameState(Player.White, Board.Initial());
-            DrawBoard(gameState.Board);
+            StartLevelMenu();
+        }
+
+        private void StartLevelMenu()
+        {
+            LevelMenu levelMenu = new LevelMenu();
+            MenuContainer.Content = levelMenu;
+
+            levelMenu.LevelSelected += level =>
+            {
+                MenuContainer.Content = null;
+                gameState = new GameState(Player.White, Board.Initial());
+                DrawBoard(gameState.Board);
+            };
         }
 
         private void SetCursor()
@@ -228,8 +240,7 @@ namespace GameUI
             HideHighlights();
             moveCache.Clear();
 
-            gameState = new GameState(Player.White, Board.Initial());
-            DrawBoard(gameState.Board);
+            StartLevelMenu();
         }
     }
 }
