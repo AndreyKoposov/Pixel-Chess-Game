@@ -1,8 +1,7 @@
 ﻿
 namespace GameLogic;
 
-public class Queen : Piece
-{
+public class Queen : Piece {
     private static readonly Direction[] dirs =
     {
         Direction.West,
@@ -18,13 +17,11 @@ public class Queen : Piece
     public override Player Color { get; }
     public override int HP { get; set; } = 15;
 
-    public Queen(Player color)
-    {
+    public Queen (Player color) {
         Color = color;
     }
 
-    public override Piece Copy()
-    {
+    public override Piece Copy () {
         Queen copy = new Queen(Color);
         copy.HasMoved = HasMoved;
         copy.HP = HP;
@@ -32,8 +29,7 @@ public class Queen : Piece
         return copy;
     }
 
-    public override IEnumerable<Move> GetMoves(Position from, Board board)
-    {
+    public override IEnumerable<Move> GetMoves (Position from, Board board) {
         return MovePositionInDirs(from, board, dirs).Select(to => new NormalMove(from, to));
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace GameLogic;
 
-public enum EndReason
-{
+public enum EndReason {
     CheckMate,
     StaleMate,
     FiftyMoveRule,

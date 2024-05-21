@@ -1,7 +1,6 @@
 ﻿namespace GameLogic;
 
-public class King : Piece
-{
+public class King : Piece {
     private static readonly Direction[] dirs =
     {
         Direction.West,
@@ -17,13 +16,11 @@ public class King : Piece
     public override Player Color { get; }
     public override int HP { get; set; } = 4;
 
-    public King(Player color)
-    {
+    public King (Player color) {
         Color = color;
     }
 
-    public override Piece Copy()
-    {
+    public override Piece Copy () {
         King copy = new King(Color);
         copy.HasMoved = HasMoved;
         copy.HP = HP;
@@ -31,36 +28,28 @@ public class King : Piece
         return copy;
     }
 
-    private IEnumerable<Position> MovePositions(Position from, Board board)
-    {
-        foreach (Direction dir in dirs)
-        {
+    private IEnumerable<Position> MovePositions (Position from, Board board) {
+        foreach (Direction dir in dirs) {
             Position to = from + dir;
 
-            if (!Board.IsInside(to))
-            {
+            if (!Board.IsInside(to)) {
                 continue;
             }
 
-            if (board.IsEmpty(to) || board[to].Color != Color)
-            {
+            if (board.IsEmpty(to) || board[to].Color != Color) {
                 yield return to;
             }
         }
     }
 
-    public override IEnumerable<Move> GetMoves(Position from, Board board)
-    {
-        foreach(Position to in MovePositions(from, board))
-        {
+    public override IEnumerable<Move> GetMoves (Position from, Board board) {
+        foreach (Position to in MovePositions(from, board)) {
             yield return new NormalMove(from, to);
         }
     }
 
-    public override bool CanCaptureOpponentKing(Position from, Board board)
-    {
-        return MovePositions(from, board).Any(to =>
-        {
+    public override bool CanCaptureOpponentKing (Position from, Board board) {
+        return MovePositions(from, board).Any(to => {
             Piece toPiece = board[to];
             return toPiece != null && toPiece.Type == PieceType.GunKing;
         });

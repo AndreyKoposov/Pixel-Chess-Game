@@ -1,8 +1,7 @@
 ﻿
 namespace GameLogic;
 
-public class Bishop : Piece
-{
+public class Bishop : Piece {
     private static readonly Direction[] dirs =
     {
         Direction.NorthEast,
@@ -15,13 +14,11 @@ public class Bishop : Piece
     public override Player Color { get; }
     public override int HP { get; set; } = 6;
 
-    public Bishop(Player color)
-    {
+    public Bishop (Player color) {
         Color = color;
     }
 
-    public override Piece Copy()
-    {
+    public override Piece Copy () {
         Bishop copy = new Bishop(Color);
         copy.HasMoved = HasMoved;
         copy.HP = HP;
@@ -29,8 +26,7 @@ public class Bishop : Piece
         return copy;
     }
 
-    public override IEnumerable<Move> GetMoves(Position from, Board board)
-    {
+    public override IEnumerable<Move> GetMoves (Position from, Board board) {
         return MovePositionInDirs(from, board, dirs).Select(to => new NormalMove(from, to));
     }
 }

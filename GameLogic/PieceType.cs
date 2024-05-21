@@ -1,7 +1,6 @@
 ﻿namespace GameLogic;
 
-public enum PieceType
-{
+public enum PieceType {
     Pawn,
     Bishop,
     Knight,
