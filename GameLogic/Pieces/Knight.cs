@@ -6,6 +6,7 @@ namespace GameLogic
     {
         public override PieceType Type => PieceType.Knight;
         public override Player Color { get; }
+        public override int HP { get; set; } = 8;
 
         public Knight(Player color)
         {

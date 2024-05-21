@@ -20,6 +20,8 @@ namespace GameUI
     {
         private readonly Image[,] pieceImages = new Image[8, 8];
         private readonly Rectangle[,] highlights = new Rectangle[8, 8];
+        private readonly TextBlock[,] hps = new TextBlock[8, 8];
+
         private readonly Dictionary<Position, Move> moveCache = [];
 
         private GameState gameState;
@@ -53,6 +55,13 @@ namespace GameUI
                     Rectangle rect = new Rectangle();
                     highlights[r, c] = rect;
                     HighlightGrid.Children.Add(rect);
+
+                    TextBlock text = new TextBlock();
+                    text.FontSize = 14;
+                    text.Margin = new Thickness(5,0,0,0);
+                    text.Foreground = Brushes.IndianRed;
+                    hps[r, c] = text;
+                    HPsGrid.Children.Add(text);
                 }
             }
         }
@@ -65,7 +74,12 @@ namespace GameUI
                 {
                     Piece piece = board[r, c];
                     pieceImages[r, c].Source = Images.GetImage(piece);
-                }
+
+                    if(piece != null)
+                        hps[r, c].Text = piece.HP.ToString();
+                    else
+                        hps[r, c].Text = "";
+                }       
             }
         }
 
@@ -145,11 +159,15 @@ namespace GameUI
 
         private void ShowHighlights()
         {
-            Color color = Color.FromArgb(150, 255, 125, 125);
+            Color moveColor = Color.FromArgb(150, 47, 255, 36);
+            Color shotColor = Color.FromArgb(150, 255, 125, 125);
 
-            foreach(Position pos in moveCache.Keys)
+            foreach (var pair in moveCache)
             {
-                highlights[pos.Row, pos.Column].Fill = new SolidColorBrush(color);
+                if (pair.Value.Type == MoveType.Normal)
+                    highlights[pair.Key.Row, pair.Key.Column].Fill = new SolidColorBrush(moveColor);
+                if (pair.Value.Type == MoveType.ShotMove)
+                    highlights[pair.Key.Row, pair.Key.Column].Fill = new SolidColorBrush(shotColor);
             }
         }
 

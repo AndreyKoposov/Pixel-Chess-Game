@@ -7,6 +7,7 @@
         DoubleQS,
         DoublePawn,
         EnPassant,
-        PawnPromotion
+        PawnPromotion,
+        ShotMove
     }
 }

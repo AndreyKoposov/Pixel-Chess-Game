@@ -5,6 +5,7 @@
         private readonly Direction forward;
         public override PieceType Type => PieceType.Pawn;
         public override Player Color { get; }
+        public override int HP { get; set; } = 4;
 
         public Pawn(Player color) 
         {

@@ -15,6 +15,7 @@
         };
         public override PieceType Type => PieceType.King;
         public override Player Color { get; }
+        public override int HP { get; set; } = 4;
 
         public King(Player color)
         {
@@ -46,12 +47,20 @@
                 }
             }
         }
+        private IEnumerable<Position> ShotPositions(Position from, Board board)
+        {
+            return board.PiecePositionsFor(Color.Opponent());
+        }
 
         public override IEnumerable<Move> GetMoves(Position from, Board board)
         {
             foreach(Position to in MovePositions(from, board))
             {
                 yield return new NormalMove(from, to);
+            }
+            foreach(Position to in ShotPositions(from, board))
+            {
+                yield return new ShotMove(from, to);
             }
         }
 

@@ -13,6 +13,7 @@ namespace GameLogic
 
         public override PieceType Type => PieceType.Bishop;
         public override Player Color { get; }
+        public override int HP { get; set; } = 6;
 
         public Bishop(Player color)
         {
