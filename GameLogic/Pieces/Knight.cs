@@ -22,12 +22,12 @@ public class Knight : Piece
         return copy;
     }
 
+    private static readonly Direction[] vDirs = [Direction.North, Direction.South];
+    private static readonly Direction[] hDirs = [Direction.East, Direction.West];
     private static IEnumerable<Position> PotentialToPositions(Position from)
     {
-        foreach (Direction vDir in new Direction[] { Direction.North, Direction.South })
-        {
-            foreach(Direction hDir in new Direction[] { Direction.East, Direction.West })
-            {
+        foreach (Direction vDir in vDirs) {
+            foreach (Direction hDir in hDirs) {
                 yield return from + 2*vDir + hDir;
                 yield return from + 2*hDir + vDir;
             }

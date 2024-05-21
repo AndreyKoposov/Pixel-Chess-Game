@@ -41,8 +41,7 @@ public abstract class Piece
     {
         return GetMoves(from, board).Any(move =>
         {
-            Piece toPiece = board[move.ToPos];
-            return toPiece != null && toPiece.Type == PieceType.GunKing;
+            return board[move.ToPos]?.Type == PieceType.GunKing;
         });
     }
 }

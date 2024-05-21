@@ -56,7 +56,7 @@ public class GunKing : Piece
     }
     private IEnumerable<Position> ShotPositions(Position from, Board board)
     {
-        if (Bullets == 0) return Enumerable.Empty<Position>();
+        if (Bullets == 0) return [];
         else              return board.PiecePositionsFor(Color.Opponent());
     }
 

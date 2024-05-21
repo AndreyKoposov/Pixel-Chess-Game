@@ -15,15 +15,12 @@ public class GameState
 
     public IEnumerable<Move> LegalMovesForPiece(Position pos)
     {
-        if(Board.IsEmpty(pos) || Board[pos].Color != CurrentPlayer)
-        {
-            return Enumerable.Empty<Move>();
-        }
+        if (Board.IsEmpty(pos) || Board[pos].Color != CurrentPlayer)
+            return [];
 
         Piece piece = Board[pos];
-        var moveCandidates = piece.GetMoves(pos, Board);
 
-        return moveCandidates.Where(move => move.IsLegal(Board));
+        return piece.GetMoves(pos, Board).Where(move => move.IsLegal(Board));
     }
 
     public void Move(Move move)
