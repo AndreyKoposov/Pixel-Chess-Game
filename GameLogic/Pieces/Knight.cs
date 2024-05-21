@@ -6,6 +6,7 @@ namespace GameLogic
     {
         public override PieceType Type => PieceType.Knight;
         public override Player Color { get; }
+        public override int HP { get; set; } = 8;
 
         public Knight(Player color)
         {
@@ -16,6 +17,7 @@ namespace GameLogic
         {
             Knight copy = new Knight(Color);
             copy.HasMoved = HasMoved;
+            copy.HP = HP;
 
             return copy;
         }

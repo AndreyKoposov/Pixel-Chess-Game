@@ -15,6 +15,7 @@
         };
         public override PieceType Type => PieceType.King;
         public override Player Color { get; }
+        public override int HP { get; set; } = 4;
 
         public King(Player color)
         {
@@ -25,6 +26,7 @@
         {
             King copy = new King(Color);
             copy.HasMoved = HasMoved;
+            copy.HP = HP;
 
             return copy;
         }
@@ -60,7 +62,7 @@
             return MovePositions(from, board).Any(to =>
             {
                 Piece toPiece = board[to];
-                return toPiece != null && toPiece.Type == PieceType.King;
+                return toPiece != null && toPiece.Type == PieceType.GunKing;
             });
         }
     }

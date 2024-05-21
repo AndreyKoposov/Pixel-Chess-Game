@@ -18,6 +18,12 @@
                 <ImageBrush ImageSource="Assets/pixel chess_v1.2/boards/board_plain_04.png" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
             </Grid.Background>
 
+            <UniformGrid x:Name="HPsGrid"
+                         Rows="8"
+                         Columns="8"
+                         Margin="20,20,20,20">
+            </UniformGrid>
+
             <UniformGrid x:Name="HighlightGrid"
                          Rows="8"
                          Columns="8"

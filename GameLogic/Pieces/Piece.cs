@@ -5,6 +5,7 @@
         public abstract PieceType Type { get; }
         public abstract Player Color { get; }
         public bool HasMoved { get; set; } = false;
+        public virtual int HP { get; set; } = 0;
 
 
         public abstract Piece Copy();
@@ -41,7 +42,7 @@
             return GetMoves(from, board).Any(move =>
             {
                 Piece toPiece = board[move.ToPos];
-                return toPiece != null && toPiece.Type == PieceType.King;
+                return toPiece != null && toPiece.Type == PieceType.GunKing;
             });
         }
     }

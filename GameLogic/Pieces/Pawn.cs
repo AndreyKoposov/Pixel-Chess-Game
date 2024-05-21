@@ -5,6 +5,7 @@
         private readonly Direction forward;
         public override PieceType Type => PieceType.Pawn;
         public override Player Color { get; }
+        public override int HP { get; set; } = 4;
 
         public Pawn(Player color) 
         {
@@ -24,6 +25,7 @@
         {
             Pawn copy = new Pawn(Color);
             copy.HasMoved = HasMoved;
+            copy.HP = HP;
 
             return copy;
         }
@@ -86,7 +88,7 @@
             return DiagonalMoves(from, board).Any(move =>
             {
                 Piece toPiece = board[move.ToPos];
-                return toPiece != null && toPiece.Type == PieceType.King;
+                return toPiece != null && toPiece.Type == PieceType.GunKing;
             });
         }
     }

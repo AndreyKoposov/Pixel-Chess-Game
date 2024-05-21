@@ -16,6 +16,7 @@ namespace GameLogic
         };
         public override PieceType Type => PieceType.Queen;
         public override Player Color { get; }
+        public override int HP { get; set; } = 15;
 
         public Queen(Player color)
         {
@@ -26,6 +27,7 @@ namespace GameLogic
         {
             Queen copy = new Queen(Color);
             copy.HasMoved = HasMoved;
+            copy.HP = HP;
 
             return copy;
         }
