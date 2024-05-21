@@ -1,7 +1,6 @@
 ﻿namespace GameLogic;
 
-public enum MoveType
-{
+public enum MoveType {
     Normal,
     DoubleKS,
     DoubleQS,

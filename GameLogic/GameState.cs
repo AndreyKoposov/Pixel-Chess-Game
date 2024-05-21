@@ -2,15 +2,15 @@
 namespace GameLogic {
     public class GameState {
         private static GameState singleton = new GameState(Player.White, Board.Initial());
-        
+
         public Board Board { get; }
         public Player CurrentPlayer { get; private set; }
         public Result Result { get; private set; } = null;
         public GunKing PlayerKing { get; private set; }
         public Stack<Move> OpponentMoves { get; private set; } = new Stack<Move>();
-        
+
         public static GameState GetInstance () => singleton;
-        
+
         private GameState (Player nextPlayer, Board nextBoard) {
             CurrentPlayer = nextPlayer;
             Board = nextBoard;

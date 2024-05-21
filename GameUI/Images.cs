@@ -4,8 +4,7 @@ using GameLogic;
 
 namespace GameUI;
 
-public static class Images
-{
+public static class Images {
     private static readonly Dictionary<PieceType, ImageSource> whiteSoures = new()
     {
         { PieceType.Pawn, LoadImage("16x32 pieces/W_Pawn.png") },
@@ -28,23 +27,19 @@ public static class Images
         { PieceType.Queen, LoadImage("16x32 pieces/B_Queen.png") }
     };
 
-    private static ImageSource LoadImage(string filePath)
-    {
+    private static ImageSource LoadImage (string filePath) {
         return new BitmapImage(new Uri("Assets/pixel chess_v1.2/" + filePath, UriKind.Relative));
     }
 
-    public static ImageSource GetImage(Player color, PieceType type)
-    {
-        return color switch
-        {
+    public static ImageSource GetImage (Player color, PieceType type) {
+        return color switch {
             Player.White => whiteSoures[type],
             Player.Black => blackSoures[type],
             _ => null
         };
     }
 
-    public static ImageSource GetImage(Piece piece)
-    {
+    public static ImageSource GetImage (Piece piece) {
         if (piece == null)
             return null;
         else
