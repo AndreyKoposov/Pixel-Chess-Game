@@ -6,6 +6,7 @@
         public Player CurrentPlayer { get; private set; }
         public Result Result { get; private set; } = null;
         public GunKing PlayerKing { get; private set; }
+        public Stack<Move> OpponentMoves { get; private set; } = new Stack<Move>();
         public GameState(Player nextPlayer, Board nextBoard)
         {
             CurrentPlayer = nextPlayer;
@@ -30,11 +31,19 @@
         {
             move.ExecuteOn(Board);
 
-            if (PlayerKing.HasShoot || CurrentPlayer != PlayerKing.Color)
+            if (PlayerKing.HasShoot && CurrentPlayer == PlayerKing.Color)
             {
                 CurrentPlayer = CurrentPlayer.Opponent();
+                //OpponentMoves.Push(new NormalMove(new Position(1, 0), new Position(2, 0)));
+                //OpponentMoves.Push(new NormalMove(new Position(1, 1), new Position(2, 1)));
+                //OpponentMoves.Push(new NormalMove(new Position(1, 2), new Position(2, 2)));
                 PlayerKing.Reset();
             }
+            if (OpponentMoves.Count == 0 && CurrentPlayer == PlayerKing.Color.Opponent())
+            {
+                CurrentPlayer = CurrentPlayer.Opponent();
+            }
+            
 
             CheckForGameOver();
         }

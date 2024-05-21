@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -88,11 +89,9 @@ namespace GameUI
 
         private void BoardGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(IsMenuOnScreen())
-            {
-                return;
-            }
-
+            if (IsMenuOnScreen()) return;
+            if (gameState.CurrentPlayer != gameState.PlayerKing.Color) return;
+            
             Point point = e.GetPosition(HighlightGrid);
             Position pos = ToSquarePosition(point);
 
@@ -136,6 +135,22 @@ namespace GameUI
             if(moveCache.TryGetValue(pos, out Move move))
             {
                 HandleMove(move);
+            }
+
+            if(gameState.CurrentPlayer == gameState.PlayerKing.Color.Opponent())
+            {
+                OpponentTurnTask();
+            }
+        }
+
+        async private void OpponentTurnTask()
+        {
+
+            while (gameState.OpponentMoves.Count > 0)
+            {
+                Move opponentMove = gameState.OpponentMoves.Pop();
+                HandleMove(opponentMove);
+                await Task.Delay(300);
             }
         }
 
