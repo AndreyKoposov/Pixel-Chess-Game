@@ -1,95 +1,94 @@
-﻿namespace GameLogic
+﻿namespace GameLogic;
+
+public class Pawn : Piece
 {
-    public class Pawn : Piece
+    private readonly Direction forward;
+    public override PieceType Type => PieceType.Pawn;
+    public override Player Color { get; }
+    public override int HP { get; set; } = 4;
+
+    public Pawn(Player color) 
     {
-        private readonly Direction forward;
-        public override PieceType Type => PieceType.Pawn;
-        public override Player Color { get; }
-        public override int HP { get; set; } = 4;
+        Color = color;
 
-        public Pawn(Player color) 
+        if(Color == Player.White)
         {
-            Color = color;
+            forward = Direction.North;
+        }
+        else
+        {
+            forward = Direction.South;
+        }
+    }
 
-            if(Color == Player.White)
-            {
-                forward = Direction.North;
-            }
-            else
-            {
-                forward = Direction.South;
-            }
+    public override Piece Copy()
+    {
+        Pawn copy = new Pawn(Color);
+        copy.HasMoved = HasMoved;
+        copy.HP = HP;
+
+        return copy;
+    }
+
+    private static bool CanMoveTo(Position pos, Board board)
+    {
+        return Board.IsInside(pos) && board.IsEmpty(pos);        
+    }
+
+    private bool CanCaptureAt(Position pos, Board board)
+    {
+        if(!Board.IsInside(pos) || board.IsEmpty(pos))
+        {
+            return false;
         }
 
-        public override Piece Copy()
-        {
-            Pawn copy = new Pawn(Color);
-            copy.HasMoved = HasMoved;
-            copy.HP = HP;
+        return board[pos].Color != Color;
+    }
 
-            return copy;
-        }
+    private IEnumerable<Move> ForwardMoves(Position from, Board board)
+    {
+        Position oneMovePos = from + forward;
 
-        private static bool CanMoveTo(Position pos, Board board)
+        if(CanMoveTo(oneMovePos, board))
         {
-            return Board.IsInside(pos) && board.IsEmpty(pos);        
-        }
+            yield return new NormalMove(from, oneMovePos);
 
-        private bool CanCaptureAt(Position pos, Board board)
-        {
-            if(!Board.IsInside(pos) || board.IsEmpty(pos))
+            Position twoMovePos = oneMovePos + forward;
+
+            if (!HasMoved && CanMoveTo(twoMovePos, board))
             {
-                return false;
-            }
-
-            return board[pos].Color != Color;
-        }
-
-        private IEnumerable<Move> ForwardMoves(Position from, Board board)
-        {
-            Position oneMovePos = from + forward;
-
-            if(CanMoveTo(oneMovePos, board))
-            {
-                yield return new NormalMove(from, oneMovePos);
-
-                Position twoMovePos = oneMovePos + forward;
-
-                if (!HasMoved && CanMoveTo(twoMovePos, board))
-                {
-                    yield return new NormalMove(from, twoMovePos);
-                }
+                yield return new NormalMove(from, twoMovePos);
             }
         }
+    }
 
-        private IEnumerable<Move> DiagonalMoves(Position from, Board board)
+    private IEnumerable<Move> DiagonalMoves(Position from, Board board)
+    {
+        foreach (Direction dir in new Direction[] { Direction.West, Direction.East })
         {
-            foreach (Direction dir in new Direction[] { Direction.West, Direction.East })
-            {
-                Position to = from + forward + dir;
+            Position to = from + forward + dir;
 
-                if(CanCaptureAt(to, board) && Board.IsInside(to))
-                {
-                    yield return new NormalMove(from, to);
-                }
+            if(CanCaptureAt(to, board) && Board.IsInside(to))
+            {
+                yield return new NormalMove(from, to);
             }
         }
+    }
 
-        public override IEnumerable<Move> GetMoves(Position from, Board board)
+    public override IEnumerable<Move> GetMoves(Position from, Board board)
+    {
+        var forwardMoves = ForwardMoves(from, board);
+        var diagonalMoves = DiagonalMoves(from, board);
+
+        return forwardMoves.Concat(diagonalMoves);
+    }
+
+    public override bool CanCaptureOpponentKing(Position from, Board board)
+    {
+        return DiagonalMoves(from, board).Any(move =>
         {
-            var forwardMoves = ForwardMoves(from, board);
-            var diagonalMoves = DiagonalMoves(from, board);
-
-            return forwardMoves.Concat(diagonalMoves);
-        }
-
-        public override bool CanCaptureOpponentKing(Position from, Board board)
-        {
-            return DiagonalMoves(from, board).Any(move =>
-            {
-                Piece toPiece = board[move.ToPos];
-                return toPiece != null && toPiece.Type == PieceType.GunKing;
-            });
-        }
+            Piece toPiece = board[move.ToPos];
+            return toPiece != null && toPiece.Type == PieceType.GunKing;
+        });
     }
 }

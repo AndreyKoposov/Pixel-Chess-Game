@@ -1,9 +1,8 @@
-﻿namespace GameUI
+﻿namespace GameUI;
+
+public enum Option
 {
-    public enum Option
-    {
-        Restart,
-        Exit,
-        Continue
-    }
+    Restart,
+    Exit,
+    Continue
 }

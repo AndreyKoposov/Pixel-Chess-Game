@@ -1,13 +1,12 @@
-﻿namespace GameLogic
+﻿namespace GameLogic;
+
+public enum MoveType
 {
-    public enum MoveType
-    {
-        Normal,
-        DoubleKS,
-        DoubleQS,
-        DoublePawn,
-        EnPassant,
-        PawnPromotion,
-        ShotMove
-    }
+    Normal,
+    DoubleKS,
+    DoubleQS,
+    DoublePawn,
+    EnPassant,
+    PawnPromotion,
+    ShotMove
 }

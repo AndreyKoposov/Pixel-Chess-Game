@@ -15,64 +15,63 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GameLogic;
 
-namespace GameUI
+namespace GameUI;
+
+/// <summary>
+/// Interaction logic for GameOverMenu.xaml
+/// </summary>
+public partial class GameOverMenu : UserControl
 {
-    /// <summary>
-    /// Interaction logic for GameOverMenu.xaml
-    /// </summary>
-    public partial class GameOverMenu : UserControl
+    public event Action<Option> OptionSelected;
+    public GameOverMenu(GameState gameState)
     {
-        public event Action<Option> OptionSelected;
-        public GameOverMenu(GameState gameState)
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            Result result = gameState.Result;
-            WinnerText.Text = GetWinnerText(result.Winner);
-            ReasonText.Text = GetReasonText(result.Reason, gameState.CurrentPlayer);
-        }
+        Result result = gameState.Result;
+        WinnerText.Text = GetWinnerText(result.Winner);
+        ReasonText.Text = GetReasonText(result.Reason, gameState.CurrentPlayer);
+    }
 
-        private static string GetWinnerText(Player winner)
+    private static string GetWinnerText(Player winner)
+    {
+        return winner switch
         {
-            return winner switch
-            {
-                Player.White => "WHITE WINS",
-                Player.Black => "BLACK WINS",
-                _  => "DRAW"
-            };
-        }
+            Player.White => "WHITE WINS",
+            Player.Black => "BLACK WINS",
+            _  => "DRAW"
+        };
+    }
 
-        private static string PlayerString(Player player)
+    private static string PlayerString(Player player)
+    {
+        return player switch
         {
-            return player switch
-            {
-                Player.White => "WHITE",
-                Player.Black => "BLACK",
-                _ => ""
-            };
-        }
+            Player.White => "WHITE",
+            Player.Black => "BLACK",
+            _ => ""
+        };
+    }
 
-        private static string GetReasonText(EndReason reason, Player currentPlayer)
+    private static string GetReasonText(EndReason reason, Player currentPlayer)
+    {
+        return reason switch
         {
-            return reason switch
-            {
-                EndReason.StaleMate => $"STALEMATE - {PlayerString(currentPlayer)} CAN'T MOVE",
-                EndReason.CheckMate => $"CHECKMATE - {PlayerString(currentPlayer)} CAN'T MOVE",
-                EndReason.FiftyMoveRule => $"FIFTY MOVE RULE",
-                EndReason.InsufficientMaterial => $"INSUFFICIENT MATERIAL",
-                EndReason.ThreefoldRepetition => $"THREEHOLD REPITITION",
-                _ => ""
-            };
-        }
+            EndReason.StaleMate => $"STALEMATE - {PlayerString(currentPlayer)} CAN'T MOVE",
+            EndReason.CheckMate => $"CHECKMATE - {PlayerString(currentPlayer)} CAN'T MOVE",
+            EndReason.FiftyMoveRule => $"FIFTY MOVE RULE",
+            EndReason.InsufficientMaterial => $"INSUFFICIENT MATERIAL",
+            EndReason.ThreefoldRepetition => $"THREEHOLD REPITITION",
+            _ => ""
+        };
+    }
 
-        private void Restart_Click(object sender, RoutedEventArgs e)
-        {
-            OptionSelected?.Invoke(Option.Restart);
-        }
+    private void Restart_Click(object sender, RoutedEventArgs e)
+    {
+        OptionSelected?.Invoke(Option.Restart);
+    }
 
-        private void Exit_Click(object sender, RoutedEventArgs e)
-        {
-            OptionSelected?.Invoke(Option.Exit);
-        }
+    private void Exit_Click(object sender, RoutedEventArgs e)
+    {
+        OptionSelected?.Invoke(Option.Exit);
     }
 }

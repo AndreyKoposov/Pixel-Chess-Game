@@ -1,13 +1,12 @@
-﻿namespace GameLogic
+﻿namespace GameLogic;
+
+public enum PieceType
 {
-    public enum PieceType
-    {
-        Pawn,
-        Bishop,
-        Knight,
-        Rook,
-        King,
-        Queen,
-        GunKing
-    }
+    Pawn,
+    Bishop,
+    Knight,
+    Rook,
+    King,
+    Queen,
+    GunKing
 }

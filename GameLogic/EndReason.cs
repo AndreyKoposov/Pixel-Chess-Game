@@ -1,11 +1,10 @@
-﻿namespace GameLogic
+﻿namespace GameLogic;
+
+public enum EndReason
 {
-    public enum EndReason
-    {
-        CheckMate,
-        StaleMate,
-        FiftyMoveRule,
-        InsufficientMaterial,
-        ThreefoldRepetition
-    }
+    CheckMate,
+    StaleMate,
+    FiftyMoveRule,
+    InsufficientMaterial,
+    ThreefoldRepetition
 }

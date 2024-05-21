@@ -1,22 +1,21 @@
-﻿namespace GameLogic
-{
-    public enum Player
-    {
-        None,
-        White,
-        Black
-    }
+﻿namespace GameLogic;
 
-    public static class PlayerExtensions
+public enum Player
+{
+    None,
+    White,
+    Black
+}
+
+public static class PlayerExtensions
+{
+    public static Player Opponent(this Player player)
     {
-        public static Player Opponent(this Player player)
+        return player switch
         {
-            return player switch
-            {
-                Player.White => Player.Black,
-                Player.Black => Player.White,
-                _            => Player.None,
-            };
-        }
+            Player.White => Player.Black,
+            Player.Black => Player.White,
+            _            => Player.None,
+        };
     }
 }
