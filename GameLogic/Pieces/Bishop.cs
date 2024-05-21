@@ -24,6 +24,7 @@ namespace GameLogic
         {
             Bishop copy = new Bishop(Color);
             copy.HasMoved = HasMoved;
+            copy.HP = HP;
 
             return copy;
         }

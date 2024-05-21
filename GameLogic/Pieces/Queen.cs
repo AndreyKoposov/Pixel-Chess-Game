@@ -27,6 +27,7 @@ namespace GameLogic
         {
             Queen copy = new Queen(Color);
             copy.HasMoved = HasMoved;
+            copy.HP = HP;
 
             return copy;
         }

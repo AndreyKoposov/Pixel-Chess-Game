@@ -23,6 +23,7 @@ namespace GameLogic
         {
             Rook copy = new Rook(Color);
             copy.HasMoved = HasMoved;
+            copy.HP = HP;
 
             return copy;
         }

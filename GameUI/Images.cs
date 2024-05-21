@@ -13,6 +13,7 @@ namespace GameUI
             { PieceType.Rook, LoadImage("16x32 pieces/W_Rook.png") },
             { PieceType.Knight, LoadImage("16x32 pieces/W_Knight.png") },
             { PieceType.King, LoadImage("16x32 pieces/W_King.png") },
+            { PieceType.GunKing, LoadImage("16x32 pieces/W_King.png") },
             { PieceType.Queen, LoadImage("16x32 pieces/W_Queen.png") }
         };
 
@@ -23,6 +24,7 @@ namespace GameUI
             { PieceType.Rook, LoadImage("16x32 pieces/B_Rook.png") },
             { PieceType.Knight, LoadImage("16x32 pieces/B_Knight.png") },
             { PieceType.King, LoadImage("16x32 pieces/B_King.png") },
+            { PieceType.GunKing, LoadImage("16x32 pieces/B_King.png") },
             { PieceType.Queen, LoadImage("16x32 pieces/B_Queen.png") }
         };
 

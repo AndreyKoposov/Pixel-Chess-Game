@@ -14,24 +14,35 @@
 
         public override void ExecuteOn(Board board)
         {
+            MakeShot(board);
+        }
+
+        public override void ExecuteOnTest(Board board)
+        {
+            MakeShot(board);
+        }
+
+        public void MakeShot(Board board)
+        {
             Piece piece = board[ToPos];
+            GunKing gunKing = (GunKing)board[FromPos];
 
             int damage = 1;
-            double distance = Math.Sqrt(Math.Pow((ToPos.Row - FromPos.Row),2) + Math.Pow((ToPos.Column - FromPos.Column),2));
+            double distance = Math.Sqrt(Math.Pow((ToPos.Row - FromPos.Row), 2) + Math.Pow((ToPos.Column - FromPos.Column), 2));
 
-            if      (distance < 2) damage = 4;
+            if (distance < 2) damage = 4;
             else if (distance < 4 && distance >= 2) damage = 3;
             else if (distance < 6 && distance >= 4) damage = 2;
             else if (distance >= 6) damage = 1;
 
             piece.HP -= damage;
-
-            if(piece.HP <= 0)
+            if (piece.HP <= 0)
             {
                 board[ToPos] = null;
             }
 
-            board[FromPos].HasMoved = true;
+            gunKing.Bullets--;
+            gunKing.HasShoot = true;
         }
     }
 }

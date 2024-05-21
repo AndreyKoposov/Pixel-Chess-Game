@@ -7,6 +7,7 @@
         Knight,
         Rook,
         King,
-        Queen
+        Queen,
+        GunKing
     }
 }

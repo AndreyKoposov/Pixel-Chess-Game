@@ -25,6 +25,7 @@
         {
             Pawn copy = new Pawn(Color);
             copy.HasMoved = HasMoved;
+            copy.HP = HP;
 
             return copy;
         }
@@ -87,7 +88,7 @@
             return DiagonalMoves(from, board).Any(move =>
             {
                 Piece toPiece = board[move.ToPos];
-                return toPiece != null && toPiece.Type == PieceType.King;
+                return toPiece != null && toPiece.Type == PieceType.GunKing;
             });
         }
     }

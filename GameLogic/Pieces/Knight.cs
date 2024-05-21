@@ -17,6 +17,7 @@ namespace GameLogic
         {
             Knight copy = new Knight(Color);
             copy.HasMoved = HasMoved;
+            copy.HP = HP;
 
             return copy;
         }

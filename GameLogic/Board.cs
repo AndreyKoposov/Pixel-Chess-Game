@@ -1,8 +1,10 @@
 ﻿
+
 namespace GameLogic
 {
     public class Board
     {
+        private readonly Position StartGunKingPosition = new Position(7, 3);
         private readonly Piece[,] pieces = new Piece[8, 8];
 
         public Piece this[int row, int column]
@@ -25,6 +27,11 @@ namespace GameLogic
             return board;
         }
 
+        public GunKing GetGunKing()
+        {
+            return (GunKing)this[StartGunKingPosition.Row, StartGunKingPosition.Column];
+        }
+
         private void AddStartPieces()
         {
             this[0, 0] = new Rook(Player.Black);
@@ -39,7 +46,7 @@ namespace GameLogic
             //this[7, 0] = new Rook(Player.White);
             //this[7, 1] = new Knight(Player.White);
             //this[7, 2] = new Bishop(Player.White);
-            this[7, 3] = new King(Player.White);
+            this[StartGunKingPosition.Row, StartGunKingPosition.Column] = new GunKing(Player.White);
             //this[7, 4] = new Queen(Player.White);
             //this[7, 5] = new Bishop(Player.White);
             //this[7, 6] = new Knight(Player.White);

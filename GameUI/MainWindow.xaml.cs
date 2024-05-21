@@ -76,7 +76,10 @@ namespace GameUI
                     pieceImages[r, c].Source = Images.GetImage(piece);
 
                     if(piece != null)
-                        hps[r, c].Text = piece.HP.ToString();
+                        if(piece.Type == PieceType.GunKing)
+                            hps[r, c].Text = ((GunKing)piece).Bullets.ToString();
+                        else
+                            hps[r, c].Text = piece.HP.ToString();
                     else
                         hps[r, c].Text = "";
                 }       

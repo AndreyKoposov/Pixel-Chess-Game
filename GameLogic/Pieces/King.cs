@@ -26,6 +26,7 @@
         {
             King copy = new King(Color);
             copy.HasMoved = HasMoved;
+            copy.HP = HP;
 
             return copy;
         }
@@ -47,20 +48,12 @@
                 }
             }
         }
-        private IEnumerable<Position> ShotPositions(Position from, Board board)
-        {
-            return board.PiecePositionsFor(Color.Opponent());
-        }
 
         public override IEnumerable<Move> GetMoves(Position from, Board board)
         {
             foreach(Position to in MovePositions(from, board))
             {
                 yield return new NormalMove(from, to);
-            }
-            foreach(Position to in ShotPositions(from, board))
-            {
-                yield return new ShotMove(from, to);
             }
         }
 
@@ -69,7 +62,7 @@
             return MovePositions(from, board).Any(to =>
             {
                 Piece toPiece = board[to];
-                return toPiece != null && toPiece.Type == PieceType.King;
+                return toPiece != null && toPiece.Type == PieceType.GunKing;
             });
         }
     }

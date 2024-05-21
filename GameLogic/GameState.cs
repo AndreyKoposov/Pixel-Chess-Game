@@ -5,11 +5,12 @@
         public Board Board { get; }
         public Player CurrentPlayer { get; private set; }
         public Result Result { get; private set; } = null;
-
+        public GunKing PlayerKing { get; private set; }
         public GameState(Player nextPlayer, Board nextBoard)
         {
             CurrentPlayer = nextPlayer;
             Board = nextBoard;
+            PlayerKing = Board.GetGunKing();
         }
 
         public IEnumerable<Move> LegalMovesForPiece(Position pos)
@@ -28,7 +29,13 @@
         public void Move(Move move)
         {
             move.ExecuteOn(Board);
-            CurrentPlayer = CurrentPlayer.Opponent();
+
+            if (PlayerKing.HasShoot || CurrentPlayer != PlayerKing.Color)
+            {
+                CurrentPlayer = CurrentPlayer.Opponent();
+                PlayerKing.Reset();
+            }
+
             CheckForGameOver();
         }
 
