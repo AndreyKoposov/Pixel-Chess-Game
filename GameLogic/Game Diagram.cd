@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="GameLogic.Bishop" Collapsed="true">
+    <Position X="19" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAQAAAAAQgAAAAAAAQAAgAAAAAA=</HashCode>
+      <FileName>Pieces\Bishop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.Board">
+    <Position X="31.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAIAAAIAAAACAAAAEQAAgAAAAAgQAAAAAQIAAA=</HashCode>
+      <FileName>Board.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.Direction">
+    <Position X="28" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACCCABABAAAAAAwAYAAAAAAAEAAAAAAAAAAAAAABAAQ=</HashCode>
+      <FileName>Direction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.GameState">
+    <Position X="29.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIIAAAAAAAAAAARAAAAAgAAAAAAAgCCAAAA=</HashCode>
+      <FileName>GameState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.GunKing">
+    <Position X="22.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAgAECAQAABAAAAAQAAABAAgAAAAAAAQAAgAAAACA=</HashCode>
+      <FileName>Pieces\GunKing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.King" Collapsed="true">
+    <Position X="19" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAEAAQAAAAAAAAQAAAAAQgAAAAAAAQAAgAAAAAA=</HashCode>
+      <FileName>Pieces\King.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.Knight" Collapsed="true">
+    <Position X="19" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAQgAAAACAAQAAAAAQgAAgAAAAQAAgAAAAAA=</HashCode>
+      <FileName>Pieces\Knight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.Move">
+    <Position X="18" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAACAAAAAAAAIQABAAAAAAA=</HashCode>
+      <FileName>Moves\Move.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.NormalMove">
+    <Position X="20" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAgAAIQABAAAgAAA=</HashCode>
+      <FileName>Moves\NormalMove.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.Pawn" Collapsed="true">
+    <Position X="20.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgEAAAEAAAAAAASgAAAAQgAAAAAAAQCAgAAAAAA=</HashCode>
+      <FileName>Pieces\Pawn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.Piece">
+    <Position X="16.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAEAAAAAAAAAAAYAAAAAQgAAAAAAAQAAgAAAAAA=</HashCode>
+      <FileName>Pieces\Piece.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.Position">
+    <Position X="26.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAwABAAAQAAAAAAoAAAAAAAAAAAiA=</HashCode>
+      <FileName>Position.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.Queen" Collapsed="true">
+    <Position X="20.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAQAAAAAQgAAAAAAAQAAgAAAAAA=</HashCode>
+      <FileName>Pieces\Queen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.Result">
+    <Position X="33.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgIAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.Rook" Collapsed="true">
+    <Position X="20.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAQAAAAAQgAAAAAAAQAAgAAAAAA=</HashCode>
+      <FileName>Pieces\Rook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLogic.ShotMove">
+    <Position X="16" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAQBAAAAAgAAAAAAAAAACAAAAIAAAIQABAAAAAgA=</HashCode>
+      <FileName>Moves\ShotMove.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="GameLogic.EndReason">
+    <Position X="26.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAEAAAACAAAAAAAAAAgAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>EndReason.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameLogic.MoveType">
+    <Position X="28" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAgAAAAAAAAAAAAJAAIIAAAAAAAABAA=</HashCode>
+      <FileName>MoveType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameLogic.PieceType">
+    <Position X="29.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAEggAAAAEAAAAQAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>PieceType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameLogic.Player">
+    <Position X="26.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

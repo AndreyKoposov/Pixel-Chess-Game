@@ -2,11 +2,16 @@
 
 public class GameState
 {
+    private static GameState singletonInstance = new GameState(Player.White, Board.Initial());
+    
     public Board Board { get; }
     public Player CurrentPlayer { get; private set; }
     public Result Result { get; private set; } = null;
     public GunKing PlayerKing { get; private set; }
-    public GameState(Player nextPlayer, Board nextBoard)
+
+    public static GameState GetInstance () => singletonInstance;
+    
+    private GameState(Player nextPlayer, Board nextBoard)
     {
         CurrentPlayer = nextPlayer;
         Board = nextBoard;
@@ -49,16 +54,12 @@ public class GameState
 
     private void CheckForGameOver()
     {
-        if(!AllLegalMovesForPlayer(CurrentPlayer).Any())
-        {
-            if(Board.IsInCheck(CurrentPlayer))
-            {
+        if (!AllLegalMovesForPlayer(CurrentPlayer).Any()) {
+
+            if (Board.IsInCheck(CurrentPlayer))
                 Result = Result.Win(CurrentPlayer.Opponent());
-            }
             else
-            {
                 Result = Result.Draw(EndReason.StaleMate);
-            }
         }
     }
 

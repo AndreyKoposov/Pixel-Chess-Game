@@ -32,7 +32,7 @@ public partial class MainWindow : Window
         InitializeBoard();
         //SetCursor();
 
-        gameState = new GameState(Player.White, Board.Initial());
+        gameState = GameState.GetInstance();
         DrawBoard(gameState.Board);
     }
 
@@ -68,21 +68,17 @@ public partial class MainWindow : Window
 
     private void DrawBoard(Board board)
     {
-        for (int r = 0; r < 8; r++)
-        {
-            for (int c = 0; c < 8; c++)
-            {
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
                 Piece piece = board[r, c];
                 pieceImages[r, c].Source = Images.GetImage(piece);
 
-                if(piece != null)
-                    if(piece.Type == PieceType.GunKing)
-                        hps[r, c].Text = ((GunKing)piece).Bullets.ToString();
-                    else
-                        hps[r, c].Text = piece.HP.ToString();
+                if (piece != null)
+                    hps[r, c].Text = piece.Type == PieceType.GunKing ? ((GunKing) piece).Bullets.ToString()
+                                                                       : piece.HP.ToString();
                 else
                     hps[r, c].Text = "";
-            }       
+            }
         }
     }
 
@@ -211,7 +207,7 @@ public partial class MainWindow : Window
         HideHighlights();
         moveCache.Clear();
 
-        gameState = new GameState(Player.White, Board.Initial());
+        gameState = GameState.GetInstance();
         DrawBoard(gameState.Board);
     }
 }

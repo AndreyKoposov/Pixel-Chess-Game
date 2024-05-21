@@ -46,12 +46,8 @@ public static class Images
     public static ImageSource GetImage(Piece piece)
     {
         if (piece == null)
-        {
             return null;
-        }
         else
-        {
             return GetImage(piece.Color, piece.Type);
-        }
     }
 }
