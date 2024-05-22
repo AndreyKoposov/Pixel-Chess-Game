@@ -1,4 +1,6 @@
-﻿namespace GameLogic {
+﻿using System.Diagnostics;
+
+namespace GameLogic {
     public class GameState {
         private static GameState singleton;
 
@@ -35,11 +37,20 @@
         public void Move (Move move) {
             move.ExecuteOn(Board);
 
+
             if (PlayerKing.HasShoot && CurrentPlayer == PlayerKing.Color) {
                 CurrentPlayer = CurrentPlayer.Opponent();
-                //OpponentMoves.Push(new NormalMove(new Position(1, 0), new Position(2, 0)));
-                //OpponentMoves.Push(new NormalMove(new Position(1, 1), new Position(2, 1)));
-                //OpponentMoves.Push(new NormalMove(new Position(1, 2), new Position(2, 2)));
+
+
+                var cleanupTask = Task.Run(async () =>
+                {
+                    string a = await ChessBot.BotMove(Board);
+                    Move mv = new NormalMove(new Position(ConvertChessNotation(a)[0], ConvertChessNotation(a)[1]), new Position(ConvertChessNotation(a)[2], ConvertChessNotation(a)[3]));
+                    OpponentMoves.Push(mv);
+                });
+                cleanupTask.Wait();
+
+
                 PlayerKing.Reset();
             }
             if (OpponentMoves.Count == 0 && CurrentPlayer == PlayerKing.Color.Opponent()) {
@@ -71,6 +82,47 @@
 
         public bool IsGameOver () {
             return Result != null;
+        }
+
+        //===================================================================
+
+        public static int[] ConvertChessNotation(string notation)
+        {
+            if (notation.Length != 4)
+            {
+                throw new ArgumentException("Notation must be exactly 4 characters long");
+            }
+
+            int[] result = new int[4];
+
+            result[0] = 8 - CharToInt(notation[1]);
+            result[1] = CharToDigit(notation[0])-1;
+            result[2] = 8 - CharToInt(notation[3]);
+            result[3] = CharToDigit(notation[2]) - 1;
+
+            return result;
+        }
+
+        private static int CharToDigit(char c)
+        {
+            // Convert columns a-h to 1-8
+            if (c < 'a' || c > 'h')
+            {
+                throw new ArgumentException("Column letter must be between 'a' and 'h'");
+            }
+
+            return c - 'a' + 1;
+        }
+
+        private static int CharToInt(char c)
+        {
+            // Convert rows 1-8 to integers 1-8
+            if (c < '1' || c > '8')
+            {
+                throw new ArgumentException("Row number must be between '1' and '8'");
+            }
+
+            return c - '0';
         }
 
     }
