@@ -1,18 +1,16 @@
 ﻿namespace GameLogic;
 
-public class Board : IPrototype
-{
-    public readonly Position StartGunKingPosition = new Position(7, 3);
+public class Board : IPrototype {
+    public readonly Position StartGunKingPosition = new(7, 3);
     private readonly Piece[,] pieces = new Piece[8, 8];
     public ILevelGenerator LevelGenerator { get; }
 
 
-    public Board(ILevelGenerator generator) 
-    {
+    public Board (ILevelGenerator generator) {
         LevelGenerator = generator;
     }
 
-    public Board () {}
+    public Board () { }
 
     public Piece this[int row, int column] {
         get { return pieces[row, column]; }
@@ -25,7 +23,7 @@ public class Board : IPrototype
     }
 
     public static Board Initial (ILevelGenerator generator) {
-        Board board = new Board(generator);
+        Board board = new(generator);
         board.AddStartPieces();
 
         return board;
@@ -50,7 +48,7 @@ public class Board : IPrototype
     public IEnumerable<Position> PiecePositions () {
         for (ushort r = 0; r < 8; r++) {
             for (ushort c = 0; c < 8; c++) {
-                Position pos = new Position(r, c);
+                Position pos = new(r, c);
 
                 if (!IsEmpty(pos)) {
                     yield return pos;
@@ -71,10 +69,10 @@ public class Board : IPrototype
     }
 
     public IPrototype Copy () {
-        Board boardCopy = new Board(LevelGenerator);
+        Board boardCopy = new(LevelGenerator);
 
         foreach (Position pos in PiecePositions()) {
-            boardCopy[pos] = (Piece)this[pos].Copy();
+            boardCopy[pos] = (Piece) this[pos].Copy();
         }
 
         return boardCopy;

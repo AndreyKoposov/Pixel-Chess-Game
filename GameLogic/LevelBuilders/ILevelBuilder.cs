@@ -7,7 +7,7 @@ internal abstract class ILevelBuilder {
     public ILevelBuilder (Board board) => this.board = board;
 
 
-    internal virtual void AddGunKing () => 
+    internal virtual void AddGunKing () =>
         board[board.StartGunKingPosition.Row, board.StartGunKingPosition.Column] = new GunKing(Player.White);
     internal virtual void AddPawns () { }
     internal virtual void AddBishops () { }

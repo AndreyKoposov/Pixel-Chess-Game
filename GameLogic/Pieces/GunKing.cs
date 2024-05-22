@@ -24,10 +24,11 @@ public class GunKing : Piece {
     }
 
     public override IPrototype Copy () {
-        GunKing copy = new GunKing(Color);
-        copy.HasMoved = HasMoved;
-        copy.HasShot = HasShot;
-        copy.Bullets = Bullets;
+        GunKing copy = new(Color) {
+            HasMoved = HasMoved,
+            HasShot = HasShot,
+            Bullets = Bullets
+        };
 
         return copy;
     }
@@ -54,7 +55,7 @@ public class GunKing : Piece {
 
     public override IEnumerable<Move> GetMoves (Position from, Board board) {
         foreach (Position to in MovePositions(from, board)) {
-            NormalMove move = new NormalMove(from, to);
+            NormalMove move = new(from, to);
             move.MoveEvent += ReloadGun;
             yield return move;
         }

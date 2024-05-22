@@ -1,7 +1,6 @@
 ﻿using GameLogic.LevelBuilders;
 
 namespace GameLogic;
-
 internal class LevelDirector {
 
     internal static Board BuildBoard (ILevelBuilder levelBuilder) {

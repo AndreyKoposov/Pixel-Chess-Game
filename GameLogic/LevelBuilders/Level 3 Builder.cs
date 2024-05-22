@@ -1,7 +1,7 @@
 ﻿namespace GameLogic.LevelBuilders;
 
 internal class Level3Builder : ILevelBuilder {
-    public Level3Builder (Board board) : base(board) {}
+    public Level3Builder (Board board) : base(board) { }
 
     internal override void AddKings () {
         board[0, 4] = new King(Player.Black);

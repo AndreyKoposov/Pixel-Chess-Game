@@ -21,9 +21,10 @@ public class King : Piece {
     }
 
     public override Piece Copy () {
-        King copy = new King(Color);
-        copy.HasMoved = HasMoved;
-        copy.HP = HP;
+        King copy = new(Color) {
+            HasMoved = HasMoved,
+            HP = HP
+        };
 
         return copy;
     }

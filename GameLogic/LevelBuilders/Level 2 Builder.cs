@@ -1,7 +1,7 @@
 ﻿namespace GameLogic.LevelBuilders;
 
 internal class Level2Builder : ILevelBuilder {
-    public Level2Builder (Board board) : base(board) {}
+    public Level2Builder (Board board) : base(board) { }
 
     internal override void AddBishops () {
         board[0, 2] = new Bishop(Player.Black);
