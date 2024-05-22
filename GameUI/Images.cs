@@ -27,9 +27,8 @@ public static class Images {
         { PieceType.Queen, LoadImage("16x32 pieces/B_Queen.png") }
     };
 
-    private static ImageSource LoadImage (string filePath) {
-        return new BitmapImage(new Uri("Assets/pixel chess_v1.2/" + filePath, UriKind.Relative));
-    }
+    private static BitmapImage LoadImage (string filePath)
+        => new BitmapImage(new Uri("Assets/pixel chess_v1.2/" + filePath, UriKind.Relative));
 
     public static ImageSource GetImage (Player color, PieceType type) {
         return color switch {

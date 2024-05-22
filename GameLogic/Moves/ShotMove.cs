@@ -39,7 +39,7 @@ internal class ShotMove : Move {
         }
 
         gunKing.Bullets--;
-        gunKing.HasShoot = true;
+        gunKing.HasShot = true;
     }
 
     private double GetDistance (Position FromPos, Position ToPos) {

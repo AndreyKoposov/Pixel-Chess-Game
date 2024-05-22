@@ -17,7 +17,7 @@ public class GunKing : Piece {
     public override PieceType Type => PieceType.GunKing;
     public override Player Color { get; }
     public int Bullets { get; set; } = 6;
-    public bool HasShoot { get; set; } = false;
+    public bool HasShot { get; set; } = false;
 
     public GunKing (Player color) {
         Color = color;
@@ -26,7 +26,7 @@ public class GunKing : Piece {
     public override IPrototype Copy () {
         GunKing copy = new GunKing(Color);
         copy.HasMoved = HasMoved;
-        copy.HasShoot = HasShoot;
+        copy.HasShot = HasShot;
         copy.Bullets = Bullets;
 
         return copy;
@@ -78,7 +78,7 @@ public class GunKing : Piece {
     }
 
     internal void Reset () {
-        HasShoot = false;
+        HasShot = false;
         HasMoved = false;
     }
 }

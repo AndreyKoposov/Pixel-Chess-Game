@@ -16,7 +16,7 @@ namespace GameLogic {
         }
         public static void ReloadGame(Level level)
         {
-            singleton = new GameState(Player.White, Board.Initial(LevelExtension.LevelBuilder(level)));
+            singleton = new GameState(Player.White, Board.Initial(level.LevelBuilder()));
         }
 
         private GameState (Player nextPlayer, Board nextBoard) {
@@ -37,8 +37,7 @@ namespace GameLogic {
         public void Move (Move move) {
             move.ExecuteOn(Board);
 
-
-            if (PlayerKing.HasShoot && CurrentPlayer == PlayerKing.Color) {
+            if (PlayerKing.HasShot && CurrentPlayer == PlayerKing.Color) {
                 CurrentPlayer = CurrentPlayer.Opponent();
 
 
