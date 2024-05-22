@@ -16,11 +16,6 @@ namespace GameLogic
             for (ushort r = 0; r < 8; r++)
             {
                 int emptyCount = 0;
-                if (r == 0)
-                {
-                    fenBuilder.Append("3k");
-                    emptyCount=-4;
-                }
                 for (ushort c = 0; c < 8; c++)
                 {
                     Position pos = new Position(r, c);
