@@ -1,13 +1,13 @@
 ﻿namespace GameLogic;
 
-public abstract class Piece {
+public abstract class Piece : IPrototype
+{
     public abstract PieceType Type { get; }
     public abstract Player Color { get; }
     public bool HasMoved { get; set; } = false;
     public virtual int HP { get; set; } = 0;
 
-
-    public abstract Piece Copy ();
+    public abstract IPrototype Copy();
     public abstract IEnumerable<Move> GetMoves (Position from, Board board);
 
     protected IEnumerable<Position> MovePositionInDir (Position from, Board board, Direction dir) {

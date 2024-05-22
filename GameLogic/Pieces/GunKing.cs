@@ -23,7 +23,7 @@ public class GunKing : Piece {
         Color = color;
     }
 
-    public override Piece Copy () {
+    public override IPrototype Copy () {
         GunKing copy = new GunKing(Color);
         copy.HasMoved = HasMoved;
         copy.HasShoot = HasShoot;

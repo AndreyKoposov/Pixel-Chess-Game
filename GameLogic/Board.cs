@@ -92,7 +92,7 @@ public class Board {
         Board boardCopy = new Board(LevelGenerator);
 
         foreach (Position pos in PiecePositions()) {
-            boardCopy[pos] = this[pos].Copy();
+            boardCopy[pos] = (Piece)this[pos].Copy();
         }
 
         return boardCopy;
