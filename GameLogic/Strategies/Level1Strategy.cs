@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameLogic.LevelBuilders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,7 @@ namespace GameLogic
 {
     public class Level1Strategy : ILevelGenerator
     {
-        public void BuildBoard(Board board)
-        {
-            board[board.StartGunKingPosition.Row, board.StartGunKingPosition.Column] = new GunKing(Player.White);
-            board[0, 4] = new King(Player.Black);
-            for (int i = 0; i < 8; i++)
-            {
-                board[1, i] = new Pawn(Player.Black);
-            }
-        }
+        public void BuildBoard (Board board) =>
+            LevelDirector.BuildBoard(new Level1Builder(board));
     }
 }
