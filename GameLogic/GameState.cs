@@ -71,12 +71,16 @@ namespace GameLogic {
         }
 
         private void CheckForGameOver () {
-            if (!AllLegalMovesForPlayer(CurrentPlayer).Any()) {
+            if (!AllLegalMovesForPlayer(CurrentPlayer).Any() && CurrentPlayer == PlayerKing.Color) {
 
                 if (Board.IsInCheck(CurrentPlayer))
                     Result = Result.Win(CurrentPlayer.Opponent());
                 else
                     Result = Result.Draw(EndReason.StaleMate);
+            }
+            else
+            {
+                //Board.PiecePositionsFor(P)
             }
         }
 

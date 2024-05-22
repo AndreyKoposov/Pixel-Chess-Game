@@ -1,6 +1,7 @@
 ﻿namespace GameLogic;
 
-public class Board {
+public class Board : IPrototype
+{
     public readonly Position StartGunKingPosition = new Position(7, 3);
     private readonly Piece[,] pieces = new Piece[8, 8];
     public ILevelGenerator LevelGenerator { get; }
@@ -88,7 +89,7 @@ public class Board {
         });
     }
 
-    public Board Copy () {
+    public IPrototype Copy () {
         Board boardCopy = new Board(LevelGenerator);
 
         foreach (Position pos in PiecePositions()) {
