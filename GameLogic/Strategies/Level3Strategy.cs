@@ -5,7 +5,7 @@
         public void BuildBoard(Board board)
         {
             board[board.StartGunKingPosition.Row, board.StartGunKingPosition.Column] = new GunKing(Player.White);
-
+            board[0, 4] = new King(Player.Black);
             board[2, 3] = new Knight(Player.Black);
             board[2, 4] = new Knight(Player.Black);
             board[1, 2] = new Knight(Player.Black);

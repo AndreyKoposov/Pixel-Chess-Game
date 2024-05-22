@@ -13,6 +13,7 @@
       <HashCode>EABAAAAIAAAIAIAACAAAAEQAAgAAAAAgQAAAAAQIAAA=</HashCode>
       <FileName>Board.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="GameLogic.Direction">
     <Position X="28" Y="0.75" Width="1.5" />
