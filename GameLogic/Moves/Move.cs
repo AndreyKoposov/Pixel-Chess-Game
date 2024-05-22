@@ -8,7 +8,7 @@ public abstract class Move {
     public abstract void ExecuteOnTest (Board board);
     public virtual bool IsLegal (Board board) {
         Player player = board[FromPos].Color;
-        Board boardCopy = board.Copy();
+        Board boardCopy = (Board)board.Copy();
         ExecuteOnTest(boardCopy);
 
         return !boardCopy.IsInCheck(player);

@@ -5,5 +5,7 @@ public enum EndReason {
     StaleMate,
     FiftyMoveRule,
     InsufficientMaterial,
-    ThreefoldRepetition
+    ThreefoldRepetition,
+    PlayerDie,
+    OpponentsDie
 }
