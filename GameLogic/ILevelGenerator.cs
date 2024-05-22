@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GameLogic {
     public interface ILevelGenerator {
-        public void BuildBoard (Board board) {
-
-        }
+        public void BuildBoard(Board board);
     }
 }

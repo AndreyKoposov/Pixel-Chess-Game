@@ -40,8 +40,10 @@ public partial class MainWindow : Window {
 
         levelMenu.LevelSelected += level => {
             MenuContainer.Content = null;
-            GameState.ReloadGame();
+
+            GameState.ReloadGame(level);
             gameState = GameState.GetInstance();
+
             DrawBoard(gameState.Board);
         };
     }

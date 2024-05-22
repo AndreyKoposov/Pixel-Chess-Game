@@ -1,7 +1,6 @@
-﻿
-namespace GameLogic {
+﻿namespace GameLogic {
     public class GameState {
-        private static GameState singleton = new GameState(Player.White, Board.Initial());
+        private static GameState singleton;
 
         public Board Board { get; }
         public Player CurrentPlayer { get; private set; }
@@ -9,17 +8,19 @@ namespace GameLogic {
         public GunKing PlayerKing { get; private set; }
         public Stack<Move> OpponentMoves { get; private set; } = new Stack<Move>();
 
-        public static GameState GetInstance () => singleton;
+        public static GameState GetInstance() 
+        {
+            return singleton; 
+        }
+        public static void ReloadGame(Level level)
+        {
+            singleton = new GameState(Player.White, Board.Initial(LevelExtension.LevelBuilder(level)));
+        }
 
         private GameState (Player nextPlayer, Board nextBoard) {
             CurrentPlayer = nextPlayer;
             Board = nextBoard;
             PlayerKing = Board.GetGunKing();
-        }
-
-        public static void ReloadGame()
-        {
-            singleton = new GameState(Player.White, Board.Initial());
         }
 
         public IEnumerable<Move> LegalMovesForPiece (Position pos) {

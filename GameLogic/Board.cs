@@ -1,9 +1,15 @@
 ﻿namespace GameLogic;
 
 public class Board {
-    private readonly Position StartGunKingPosition = new Position(7, 3);
+    public readonly Position StartGunKingPosition = new Position(7, 3);
     private readonly Piece[,] pieces = new Piece[8, 8];
+    public ILevelGenerator LevelGenerator { get; }
 
+
+    public Board(ILevelGenerator generator) 
+    {
+        LevelGenerator = generator;
+    }
     public Piece this[int row, int column] {
         get { return pieces[row, column]; }
         set { pieces[row, column] = value; }
@@ -14,8 +20,8 @@ public class Board {
         set { pieces[pos.Row, pos.Column] = value; }
     }
 
-    public static Board Initial () {
-        Board board = new Board();
+    public static Board Initial (ILevelGenerator generator) {
+        Board board = new Board(generator);
         board.AddStartPieces();
 
         return board;
@@ -26,14 +32,15 @@ public class Board {
     }
 
     private void AddStartPieces () {
-        this[0, 0] = new Rook(Player.Black);
+        LevelGenerator.BuildBoard(this);
+        /*this[0, 0] = new Rook(Player.Black);
         this[0, 1] = new Knight(Player.Black);
         this[0, 2] = new Bishop(Player.Black);
-        /*this[0, 3] = new Queen(Player.Black);
+        this[0, 3] = new Queen(Player.Black);
         this[0, 4] = new King(Player.Black);
         this[0, 5] = new Bishop(Player.Black);
         this[0, 6] = new Knight(Player.Black);
-        this[0, 7] = new Rook(Player.Black);*/
+        this[0, 7] = new Rook(Player.Black);
 
         //this[7, 0] = new Rook(Player.White);
         //this[7, 1] = new Knight(Player.White);
@@ -47,7 +54,7 @@ public class Board {
         for (int i = 0; i < 3; i++) {
             this[1, i] = new Pawn(Player.Black);
             //this[6, i] = new Pawn(Player.White);
-        }
+        }*/
     }
 
     public static bool IsInside (Position pos) {
@@ -82,7 +89,7 @@ public class Board {
     }
 
     public Board Copy () {
-        Board boardCopy = new Board();
+        Board boardCopy = new Board(LevelGenerator);
 
         foreach (Position pos in PiecePositions()) {
             boardCopy[pos] = this[pos].Copy();
