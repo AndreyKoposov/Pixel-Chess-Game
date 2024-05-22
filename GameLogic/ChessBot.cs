@@ -100,7 +100,7 @@ namespace GameLogic
             string stockfishPath = @"stockfish\stockfish-windows-x86-64-avx2.exe";
             if (!File.Exists(stockfishPath))
             {
-                Console.WriteLine("Error: Stockfish doesn't exist.");
+                Trace.WriteLine("Error: Stockfish doesn't exist.");
             }
             // Создание процесса под названием Stockfish
             var engineProcess = new Process
