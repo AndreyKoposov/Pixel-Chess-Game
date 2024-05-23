@@ -17,17 +17,18 @@ public class GunKing : Piece {
     public override PieceType Type => PieceType.GunKing;
     public override Player Color { get; }
     public int Bullets { get; set; } = 6;
-    public bool HasShoot { get; set; } = false;
+    public bool HasShot { get; set; } = false;
 
     public GunKing (Player color) {
         Color = color;
     }
 
     public override IPrototype Copy () {
-        GunKing copy = new GunKing(Color);
-        copy.HasMoved = HasMoved;
-        copy.HasShoot = HasShoot;
-        copy.Bullets = Bullets;
+        GunKing copy = new(Color) {
+            HasMoved = HasMoved,
+            HasShot = HasShot,
+            Bullets = Bullets
+        };
 
         return copy;
     }
@@ -54,7 +55,7 @@ public class GunKing : Piece {
 
     public override IEnumerable<Move> GetMoves (Position from, Board board) {
         foreach (Position to in MovePositions(from, board)) {
-            NormalMove move = new NormalMove(from, to);
+            NormalMove move = new(from, to);
             move.MoveEvent += ReloadGun;
             yield return move;
         }
@@ -78,7 +79,7 @@ public class GunKing : Piece {
     }
 
     internal void Reset () {
-        HasShoot = false;
+        HasShot = false;
         HasMoved = false;
     }
 }

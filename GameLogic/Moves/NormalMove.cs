@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace GameLogic;
+﻿namespace GameLogic;
 
 public class NormalMove : Move {
     public override MoveType Type => MoveType.Normal;

@@ -22,9 +22,10 @@ public class Queen : Piece {
     }
 
     public override Piece Copy () {
-        Queen copy = new Queen(Color);
-        copy.HasMoved = HasMoved;
-        copy.HP = HP;
+        Queen copy = new(Color) {
+            HasMoved = HasMoved,
+            HP = HP
+        };
 
         return copy;
     }

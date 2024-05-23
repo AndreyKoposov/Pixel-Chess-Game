@@ -1,6 +1,4 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-
-namespace GameLogic;
+﻿namespace GameLogic;
 
 internal class ShotMove : Move {
     public override MoveType Type => MoveType.ShotMove;
@@ -39,7 +37,7 @@ internal class ShotMove : Move {
         }
 
         gunKing.Bullets--;
-        gunKing.HasShoot = true;
+        gunKing.HasShot = true;
     }
 
     private double GetDistance (Position FromPos, Position ToPos) {
@@ -65,7 +63,7 @@ internal class ShotMove : Move {
 
         int delta = -(area.Length / 2);
         for (int i = 0; i < area.Length; i++) {
-            Position nextPos = new Position(ToPos.Row + delta * dir.RowDelta, ToPos.Column + delta * dir.ColumnDelta);
+            Position nextPos = new(ToPos.Row + delta * dir.RowDelta, ToPos.Column + delta * dir.ColumnDelta);
             area[i] = nextPos;
             delta++;
         }
