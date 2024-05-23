@@ -34,7 +34,7 @@ public class GameState {
         move.ExecuteOn(Board);
 
 
-            if (PlayerKing.HasShoot && CurrentPlayer == PlayerKing.Color) {
+            if (PlayerKing.HasShot && CurrentPlayer == PlayerKing.Color) {
                 if (!IsNextTurn())
                 {
                     return;
