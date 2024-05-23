@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace GameLogic;
+﻿namespace GameLogic;
 
 public class Result {
     public Player Winner { get; }

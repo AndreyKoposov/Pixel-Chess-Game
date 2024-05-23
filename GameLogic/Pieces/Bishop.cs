@@ -1,8 +1,7 @@
 ﻿
 namespace GameLogic;
 
-public class Bishop : Piece
-{
+public class Bishop : Piece {
     private static readonly Direction[] dirs =
     {
         Direction.NorthEast,
@@ -20,9 +19,10 @@ public class Bishop : Piece
     }
 
     public override IPrototype Copy () {
-        Bishop copy = new Bishop(Color);
-        copy.HasMoved = HasMoved;
-        copy.HP = HP;
+        Bishop copy = new(Color) {
+            HasMoved = HasMoved,
+            HP = HP
+        };
 
         return copy;
     }

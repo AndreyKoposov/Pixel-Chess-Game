@@ -18,9 +18,10 @@ public class Rook : Piece {
     }
 
     public override Piece Copy () {
-        Rook copy = new Rook(Color);
-        copy.HasMoved = HasMoved;
-        copy.HP = HP;
+        Rook copy = new(Color) {
+            HasMoved = HasMoved,
+            HP = HP
+        };
 
         return copy;
     }

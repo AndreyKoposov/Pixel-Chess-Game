@@ -18,9 +18,10 @@ public class Pawn : Piece {
     }
 
     public override Piece Copy () {
-        Pawn copy = new Pawn(Color);
-        copy.HasMoved = HasMoved;
-        copy.HP = HP;
+        Pawn copy = new(Color) {
+            HasMoved = HasMoved,
+            HP = HP
+        };
 
         return copy;
     }

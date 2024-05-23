@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace GameLogic;
+﻿namespace GameLogic;
 
 public class Knight : Piece {
     public override PieceType Type => PieceType.Knight;
@@ -12,9 +10,10 @@ public class Knight : Piece {
     }
 
     public override Piece Copy () {
-        Knight copy = new Knight(Color);
-        copy.HasMoved = HasMoved;
-        copy.HP = HP;
+        Knight copy = new(Color) {
+            HasMoved = HasMoved,
+            HP = HP
+        };
 
         return copy;
     }
