@@ -39,7 +39,10 @@ namespace GameLogic {
 
 
             if (PlayerKing.HasShoot && CurrentPlayer == PlayerKing.Color) {
-                CurrentPlayer = CurrentPlayer.Opponent();
+                if (!IsNextTurn())
+                {
+                    return;
+                }
 
 
                 var cleanupTask = Task.Run(async () =>
@@ -54,11 +57,32 @@ namespace GameLogic {
                 PlayerKing.Reset();
             }
             if (OpponentMoves.Count == 0 && CurrentPlayer == PlayerKing.Color.Opponent()) {
-                CurrentPlayer = CurrentPlayer.Opponent();
+                if (!IsNextTurn())
+                {
+                    return;
+                }
             }
+            if (OpponentMoves.Count > 0 && CurrentPlayer == PlayerKing.Color.Opponent())
+            {
+                CheckForGameOver();
+                if (Result != null)
+                {
+                    return;
+                }
+            }
+        }
 
-
+        private bool IsNextTurn()
+        {
+            CurrentPlayer = CurrentPlayer.Opponent();
             CheckForGameOver();
+
+            return Result == null;
+        }
+
+        private void NextTurn()
+        {
+            CurrentPlayer = CurrentPlayer.Opponent();
         }
 
         public IEnumerable<Move> AllLegalMovesForPlayer (Player player) {
@@ -71,16 +95,16 @@ namespace GameLogic {
         }
 
         private void CheckForGameOver () {
-            if (!AllLegalMovesForPlayer(CurrentPlayer).Any() && CurrentPlayer == PlayerKing.Color) {
-
-                if (Board.IsInCheck(CurrentPlayer))
-                    Result = Result.Win(CurrentPlayer.Opponent());
-                else
-                    Result = Result.Draw(EndReason.StaleMate);
-            }
-            else
+            if (CurrentPlayer == PlayerKing.Color.Opponent())
             {
-                //Board.PiecePositionsFor(P)
+                if (!Board.HasKingOf(CurrentPlayer))
+                    Result = Result.KingDefeated(CurrentPlayer.Opponent());
+                else if (Board.OnlyKingFor(CurrentPlayer))
+                    Result = Result.KingsArmyDefeated(CurrentPlayer.Opponent());
+            }
+            else if (!AllLegalMovesForPlayer(CurrentPlayer).Any())
+            {
+                Result = Result.Win(CurrentPlayer.Opponent());
             }
         }
 

@@ -11,8 +11,17 @@ public class Result {
         Reason = reason;
     }
 
-    public static Result Win (Player winner) {
+    public static Result Win(Player winner) {
         return new Result(winner, EndReason.CheckMate);
+    }
+
+    public static Result KingDefeated(Player winner)
+    {
+        return new Result(winner, EndReason.KingDied);
+    }
+    public static Result KingsArmyDefeated(Player winner)
+    {
+        return new Result(winner, EndReason.OnlyKing);
     }
 
     public static Result Draw (EndReason reason) {

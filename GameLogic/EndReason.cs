@@ -7,5 +7,7 @@ public enum EndReason {
     InsufficientMaterial,
     ThreefoldRepetition,
     PlayerDie,
-    OpponentsDie
+    OpponentsDie,
+    KingDied,
+    OnlyKing
 }

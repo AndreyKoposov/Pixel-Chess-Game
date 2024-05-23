@@ -53,6 +53,8 @@ public partial class GameOverMenu : UserControl {
             EndReason.FiftyMoveRule => $"FIFTY MOVE RULE",
             EndReason.InsufficientMaterial => $"INSUFFICIENT MATERIAL",
             EndReason.ThreefoldRepetition => $"THREEHOLD REPITITION",
+            EndReason.KingDied => $"{PlayerString(currentPlayer)} KING IS DEFEATED",
+            EndReason.OnlyKing => $"{PlayerString(currentPlayer)} KING'S ARMY IS DEFEATED",
             _ => ""
         };
     }

@@ -14,7 +14,7 @@ public class King : Piece {
     };
     public override PieceType Type => PieceType.King;
     public override Player Color { get; }
-    public override int HP { get; set; } = 4;
+    public override int HP { get; set; } = 20;
 
     public King (Player color) {
         Color = color;

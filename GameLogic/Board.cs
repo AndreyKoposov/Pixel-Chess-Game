@@ -1,4 +1,6 @@
-﻿namespace GameLogic;
+﻿using System.Drawing;
+
+namespace GameLogic;
 
 public class Board : IPrototype
 {
@@ -97,5 +99,23 @@ public class Board : IPrototype
         }
 
         return boardCopy;
+    }
+
+    public bool HasKingOf(Player color)
+    {
+        foreach(Position pos in PiecePositionsFor(color))
+        {
+            if (this[pos].Type == PieceType.King)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool OnlyKingFor(Player color)
+    {
+        return HasKingOf(color) && PiecePositionsFor(color).Count() == 1;
     }
 }

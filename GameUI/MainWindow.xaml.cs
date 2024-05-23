@@ -136,12 +136,17 @@ public partial class MainWindow : Window {
         }
     }
 
-    async private void OpponentTurnTask () {
+    private void OpponentTurnTask () 
+    {
+        if (gameState.IsGameOver())
+        {
+            ShowGameOver();
+            return;
+        }
 
         while (gameState.OpponentMoves.Count > 0) {
             Move opponentMove = gameState.OpponentMoves.Pop();
             HandleMove(opponentMove);
-            await Task.Delay(300);
         }
     }
 
