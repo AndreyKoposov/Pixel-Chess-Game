@@ -104,6 +104,8 @@ internal class ChessBot {
 
         // Инициализация движка
         await inputWriter.WriteLineAsync("uci");
+        await inputWriter.WriteLineAsync("setoption name Skill Level value 20");
+        //await inputWriter.WriteLineAsync("isready");
         await inputWriter.FlushAsync();
 
         // Ждем ответа от движка
@@ -118,7 +120,7 @@ internal class ChessBot {
         await inputWriter.FlushAsync();
 
         // Получаем лучший ход за 2 сек.
-        await inputWriter.WriteLineAsync("go movetime 2000");
+        await inputWriter.WriteLineAsync("go movetime 1000");
         await inputWriter.FlushAsync();
 
         // Получаем ответ от движка

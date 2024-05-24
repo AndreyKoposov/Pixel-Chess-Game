@@ -111,7 +111,11 @@ public class GameState {
 
     public static int[] ConvertChessNotation (string notation) {
         if (notation.Length != 4) {
-            throw new ArgumentException("Notation must be exactly 4 characters long");
+            if (notation.Length != 5)
+            {
+                throw new ArgumentException("Notation must be exactly 4 characters long");
+            }
+            else notation= notation.Remove(notation.Length - 1);
         }
 
         int[] result = new int[4];
