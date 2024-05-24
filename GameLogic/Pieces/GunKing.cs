@@ -50,7 +50,36 @@ public class GunKing : Piece {
     }
     private IEnumerable<Position> ShotPositions (Position from, Board board) {
         if (Bullets == 0) return [];
-        else return board.PiecePositionsFor(Color.Opponent());
+        else return board.PiecePositionsFor(Color.Opponent()).Where(pos =>
+        {
+            return CheckPiecePositionForShot(from, pos, board);
+        });
+    }
+
+    private bool CheckPiecePositionForShot(Position from, Position to, Board board)
+    {
+        Direction shotDir = new Direction(from.Row - to.Row, from.Column - to.Column);
+
+        int RowDir, ColDir;
+        if (shotDir.RowDelta > shotDir.ColumnDelta)
+        {
+            RowDir = Math.Sign(shotDir.RowDelta);
+            ColDir = 0;
+        }
+        else if (shotDir.RowDelta > shotDir.ColumnDelta)
+        {
+            RowDir = 0;
+            ColDir = Math.Sign(shotDir.ColumnDelta);
+        }
+        else
+        {
+            RowDir = Math.Sign(shotDir.RowDelta);
+            ColDir = Math.Sign(shotDir.ColumnDelta);
+        }
+
+        Position front = new Position(to.Row + RowDir, to.Column + ColDir);
+
+        return board.IsEmpty(front) || board[front].Type == PieceType.GunKing;
     }
 
     public override IEnumerable<Move> GetMoves (Position from, Board board) {
@@ -65,11 +94,6 @@ public class GunKing : Piece {
     }
 
     public override bool CanCaptureOpponentKing (Position from, Board board) {
-        /*return MovePositions(from, board).Any(to =>
-        {
-            Piece toPiece = board[to];
-            return toPiece != null && toPiece.Type == PieceType.King;
-        });*/
         return false;
     }
 
