@@ -91,6 +91,8 @@ public partial class MainWindow : Window {
         Point point = e.GetPosition(HighlightGrid);
         Position pos = ToSquarePosition(point);
 
+        if (!Board.IsInside(pos)) return;
+
         if (selectedPos == null) {
             OnFromPositionSelected(pos);
         }
