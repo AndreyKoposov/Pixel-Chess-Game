@@ -39,17 +39,13 @@ public class GameState {
                 {
                     return;
                 }
+            ChessBot cb = new StockFishToChessBot();
+
+            Move mv = new NormalMove(new Position(cb.BotMove(Board)[0], cb.BotMove(Board)[1]), new Position(cb.BotMove(Board)[2], cb.BotMove(Board)[3]));
+            OpponentMoves.Push(mv);
 
 
-            var cleanupTask = Task.Run(async () => {
-                string a = await ChessBot.BotMove(Board);
-                Move mv = new NormalMove(new Position(ConvertChessNotation(a)[0], ConvertChessNotation(a)[1]), new Position(ConvertChessNotation(a)[2], ConvertChessNotation(a)[3]));
-                OpponentMoves.Push(mv);
-            });
-            cleanupTask.Wait();
-
-
-                PlayerKing.Reset();
+            PlayerKing.Reset();
             }
             if (OpponentMoves.Count == 0 && CurrentPlayer == PlayerKing.Color.Opponent()) {
                 if (!IsNextTurn())
@@ -107,43 +103,5 @@ public class GameState {
         return Result != null;
     }
 
-    //===================================================================
-
-    public static int[] ConvertChessNotation (string notation) {
-        if (notation.Length != 4) {
-            if (notation.Length != 5)
-            {
-                throw new ArgumentException("Notation must be exactly 4 characters long");
-            }
-            else notation= notation.Remove(notation.Length - 1);
-        }
-
-        int[] result = new int[4];
-
-        result[0] = 8 - CharToInt(notation[1]);
-        result[1] = CharToDigit(notation[0]) - 1;
-        result[2] = 8 - CharToInt(notation[3]);
-        result[3] = CharToDigit(notation[2]) - 1;
-
-        return result;
-    }
-
-    private static int CharToDigit (char c) {
-        // Convert columns a-h to 1-8
-        if (c < 'a' || c > 'h') {
-            throw new ArgumentException("Column letter must be between 'a' and 'h'");
-        }
-
-        return c - 'a' + 1;
-    }
-
-    private static int CharToInt (char c) {
-        // Convert rows 1-8 to integers 1-8
-        if (c < '1' || c > '8') {
-            throw new ArgumentException("Row number must be between '1' and '8'");
-        }
-
-        return c - '0';
-    }
 
 }
