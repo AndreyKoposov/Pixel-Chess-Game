@@ -20,19 +20,24 @@ public partial class MainWindow : Window {
 
     private GameState gameState;
     private Position selectedPos = null;
+    private GameDialog gameDialog;
     public MainWindow () {
         InitializeComponent();
         InitializeBoard();
-        //SetCursor();
+
+        gameDialog = new GameDialog();
 
         StartLevelMenu();
     }
 
     private void StartLevelMenu () {
         LevelMenu levelMenu = new();
+        levelMenu.SetMediator(gameDialog);
+
+        gameDialog.LevelMenu = levelMenu;
         MenuContainer.Content = levelMenu;
 
-        levelMenu.LevelSelected += level => {
+        gameDialog.LevelOptionSelected += level => {
             MenuContainer.Content = null;
 
             GameState.ReloadGame(level);
@@ -90,6 +95,8 @@ public partial class MainWindow : Window {
 
         Point point = e.GetPosition(HighlightGrid);
         Position pos = ToSquarePosition(point);
+
+        if (!Board.IsInside(pos)) return;
 
         if (selectedPos == null) {
             OnFromPositionSelected(pos);
@@ -186,9 +193,12 @@ public partial class MainWindow : Window {
 
     private void ShowGameOver () {
         GameOverMenu gameOverMenu = new(gameState);
+        gameOverMenu.SetMediator(gameDialog);
+
+        gameDialog.GameOverMenu = gameOverMenu;
         MenuContainer.Content = gameOverMenu;
 
-        gameOverMenu.OptionSelected += option => {
+        gameDialog.GameOverOptionSelected += option => {
             if (option == Option.Restart) {
                 MenuContainer.Content = null;
                 RestartGame();
