@@ -148,7 +148,7 @@ internal class StockFishToChessBot : ChessBot
         await inputWriter.FlushAsync();
 
         // Получаем лучший ход за 2 сек.
-        await inputWriter.WriteLineAsync("go movetime 2000");
+        await inputWriter.WriteLineAsync("go movetime 1000");
         await inputWriter.FlushAsync();
 
         // Получаем ответ от движка
