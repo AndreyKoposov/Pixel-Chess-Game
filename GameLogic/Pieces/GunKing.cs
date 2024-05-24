@@ -61,12 +61,12 @@ public class GunKing : Piece {
         Direction shotDir = new Direction(from.Row - to.Row, from.Column - to.Column);
 
         int RowDir, ColDir;
-        if (shotDir.RowDelta > shotDir.ColumnDelta)
+        if (Math.Abs(shotDir.RowDelta) > Math.Abs(shotDir.ColumnDelta))
         {
             RowDir = Math.Sign(shotDir.RowDelta);
             ColDir = 0;
         }
-        else if (shotDir.RowDelta > shotDir.ColumnDelta)
+        else if (Math.Abs(shotDir.RowDelta) < Math.Abs(shotDir.ColumnDelta))
         {
             RowDir = 0;
             ColDir = Math.Sign(shotDir.ColumnDelta);
