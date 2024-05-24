@@ -7,14 +7,20 @@ namespace GameUI;
 /// <summary>
 /// Interaction logic for GameOverMenu.xaml
 /// </summary>
-public partial class GameOverMenu : UserControl {
-    public event Action<Option> OptionSelected;
+public partial class GameOverMenu : UserControl, GameUIComponent {
+    //public event Action<Option> OptionSelected;
+    private GameDialog dialog;
     public GameOverMenu (GameState gameState) {
         InitializeComponent();
 
         Result result = gameState.Result;
         WinnerText.Text = GetWinnerText(result.Winner);
         ReasonText.Text = GetReasonText(result.Reason, gameState.CurrentPlayer);
+    }
+
+    public void SetMediator(IMediator mediator)
+    {
+        this.dialog = (GameDialog)mediator;
     }
 
     private static string GetWinnerText (Player winner) {
@@ -47,10 +53,12 @@ public partial class GameOverMenu : UserControl {
     }
 
     private void Restart_Click (object sender, RoutedEventArgs e) {
-        OptionSelected?.Invoke(Option.Restart);
+        dialog.Notify(this, Option.Restart);
+        //OptionSelected?.Invoke(Option.Restart);
     }
 
     private void Exit_Click (object sender, RoutedEventArgs e) {
-        OptionSelected?.Invoke(Option.Exit);
+        dialog.Notify(this, Option.Exit);
+        //OptionSelected?.Invoke(Option.Exit);
     }
 }
